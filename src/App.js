@@ -3,6 +3,7 @@ import './App.css';
 import FilmContextProvider from './contexts/FilmContext';
 import Navbar from './components/Navbar';
 import FilmList from './components/FilmList';
+import NewFilmForm from './components/NewFilmForm';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <FilmContextProvider>
         <Navbar />
         <FilmList />
+        <NewFilmForm />
       </FilmContextProvider>
     </div>
   );
