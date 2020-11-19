@@ -3,13 +3,15 @@ import { FilmContext } from '../contexts/FilmContext';
 
 
 const NewFilmForm = () => {
-    const { addFilm } = useContext(FilmContext);
+    const { dispatch } = useContext(FilmContext);
     const [ title, setTitle ] = useState('');
     const [ format, setFormat ] = useState('unknown');
     const handleSubmit = (e) => {
       e.preventDefault();
       console.log(title, format);
-      addFilm(title, format);
+      dispatch({type: 'ADD_FILM', film: {
+        title, format
+      }});
       setTitle('');
       setFormat('unknown')
     };
