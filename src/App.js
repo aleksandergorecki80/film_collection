@@ -3,6 +3,7 @@ import FilmContextProvider from './contexts/FilmContext';
 import Navbar from './components/Navbar';
 import FilmList from './components/FilmList';
 import NewFilmForm from './components/NewFilmForm';
+import AddNewFilm from './components/AddNewFilm';
 
 import { HashRouter, Route, Switch } from 'react-router-dom';
 
@@ -15,7 +16,7 @@ function App() {
           <Navbar />
             <Switch>
             <Route path="/addNewFilm">
-                <NewFilmForm />
+                <AddNewFilm />
               </Route>
               <Route path="/" strict>
                 <FilmList />
