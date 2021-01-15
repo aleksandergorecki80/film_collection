@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SearchForFilmData from "./SearchForFilmData";
+import SearchForFilmData from "./filmsFromOmdb/SearchForFilmData";
 import NewFilmForm from "./NewFilmForm";
 
 const AddNewFilm = () => {

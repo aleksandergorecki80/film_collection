@@ -2,7 +2,6 @@ import './App.css';
 import FilmContextProvider from './contexts/FilmContext';
 import Navbar from './components/Navbar';
 import FilmList from './components/FilmList';
-import NewFilmForm from './components/NewFilmForm';
 import AddNewFilm from './components/AddNewFilm';
 
 import { HashRouter, Route, Switch } from 'react-router-dom';
