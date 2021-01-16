@@ -18,6 +18,6 @@ const FilmContextProvider = (props) => {
             { props.children }
         </FilmContext.Provider>
      );
-}
+};
  
 export default FilmContextProvider;
