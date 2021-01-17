@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SearchForFilmData from "./filmsFromOmdb/SearchForFilmData";
 import NewFilmForm from "./NewFilmForm";
-import ImportFilmDataContextProvider from "../contexts/ImportFilmDataContext";
+
 
 const AddNewFilm = () => {
     const [addingMethod, setAddingMethod ] = useState('search');
@@ -27,9 +27,9 @@ const AddNewFilm = () => {
                 <span>Add data manually</span>
                 </label>
             </form>
-            <ImportFilmDataContextProvider>
+
                 {addingMethod === "search" ? <SearchForFilmData /> :  <NewFilmForm />}
-            </ImportFilmDataContextProvider>
+
         </div>
      );
 }

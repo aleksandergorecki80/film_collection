@@ -1,14 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { FilmContext } from '../contexts/FilmContext';
 
-
 const NewFilmForm = () => {
     const { dispatch } = useContext(FilmContext);
     const [ title, setTitle ] = useState('');
     const [ format, setFormat ] = useState('unknown');
     const handleSubmit = (e) => {
       e.preventDefault();
-      console.log(title, format);
       dispatch({type: 'ADD_FILM', film: {
         title, format
       }});
