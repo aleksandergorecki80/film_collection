@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useReducer } from 'react';
+import React, { createContext, useReducer } from 'react';
 import { importFilmDataReducer } from '../reducers/importFilmDataReducer';
 
 export const ImportFilmDataContext = createContext();

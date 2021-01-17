@@ -12,24 +12,26 @@ function App() {
   // const location = useLocation();
   return (
     <div className="App">
+      <ImportFilmDataContextProvider>
       <FilmContextProvider>
         <HashRouter>
           <Navbar />
             <Switch>
-              <ImportFilmDataContextProvider>
+              
                 <Route path="/addNewFilm">
                   <AddNewFilm />
                 </Route>
                 <Route path="/confirmData">
                   <ConfirmFilmData />
                 </Route>
-              </ImportFilmDataContextProvider>
+              
               <Route path="/" strict>
                 <FilmList />
               </Route>
             </Switch>
         </HashRouter>
       </FilmContextProvider>
+      </ImportFilmDataContextProvider>
     </div>
   );
 }

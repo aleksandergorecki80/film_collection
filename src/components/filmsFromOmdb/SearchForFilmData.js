@@ -26,7 +26,6 @@ const SearchForFilmData = () => {
                 .then((res) => {
                     const movies = res.data.Search;
                     setMoviesList(movies);
-                    console.log('get');
                 })
                 .catch((err) => {
                     console.log(err);
@@ -39,10 +38,13 @@ console.log(moviesList);
             <form onSubmit={searchMovie}>
                 <input type="text" placeholder="Search Movie" onChange={onHandleChange} />
                 <input type="submit" value="Search" />
-                {moviesList ? <FilmsList moviesList={moviesList} /> : 'nothing to display'}
+                
             </form>
-            {page>1 && <button onClick={()=>{onNextPreviousPage(-1)}}>Previous</button>}
-            {moviesList.length >=10 && <button onClick={()=>{onNextPreviousPage(1)}}>Next</button>}
+            { moviesList ? 
+            <FilmsList moviesList={moviesList} /> 
+            : 'nothing to display'}
+            {(moviesList && page>1) && <button onClick={()=>{onNextPreviousPage(-1)}}>Previous</button>}
+            {(moviesList && moviesList.length >=10) && <button onClick={()=>{onNextPreviousPage(1)}}>Next</button>}
         </div>
     );
 }
