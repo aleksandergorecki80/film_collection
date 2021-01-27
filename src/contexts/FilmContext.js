@@ -1,18 +1,25 @@
-import React, { createContext, useEffect, useReducer } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { createContext,  useReducer } from 'react';
 import { filmReducer } from '../reducers/filmReducer';
 
 export const FilmContext = createContext();
 
 const FilmContextProvider = (props) => {
-    const intValue = () => {
-        const localData = localStorage.getItem('films');
-        return localData ? JSON.parse(localData) : [];
-    }
-    const [ films, dispatch ] = useReducer( filmReducer, [], intValue);
-    useEffect(() => {
-        localStorage.setItem('films', JSON.stringify(films));
-    }, [films]);
+    
+    // pobiera informacje z local storage
+    // const intValue = () => {
+    //     const localData = localStorage.getItem('films');
+    //     return localData ? JSON.parse(localData) : [];
+    // }
+
+    // const [ films, dispatch ] = useReducer( filmReducer, [], intValue); / inicjuje liste filmów z local storage
+
+    const [ films, dispatch ] = useReducer( filmReducer, []);
+    
+    // zapisuje filmy do local storage
+    // useEffect(() => {
+    //     localStorage.setItem('films', JSON.stringify(films));
+    // }, [films]);
+    
     return ( 
         <FilmContext.Provider value={{films, dispatch}}>
             { props.children }

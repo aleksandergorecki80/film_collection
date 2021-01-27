@@ -13,24 +13,25 @@ function App() {
   return (
     <div className="App">
       <ImportFilmDataContextProvider>
-      <FilmContextProvider>
-        <HashRouter>
-          <Navbar />
-            <Switch>
-              
-                <Route path="/addNewFilm">
-                  <AddNewFilm />
+        <FilmContextProvider>
+          <HashRouter>
+            {/* <BackendTest /> */}
+            <Navbar />
+              <Switch>
+                
+                  <Route path="/addNewFilm">
+                    <AddNewFilm />
+                  </Route>
+                  <Route path="/confirmData">
+                    <ConfirmFilmData />
+                  </Route>
+                
+                <Route path="/" strict>
+                  <FilmList />
                 </Route>
-                <Route path="/confirmData">
-                  <ConfirmFilmData />
-                </Route>
-              
-              <Route path="/" strict>
-                <FilmList />
-              </Route>
-            </Switch>
-        </HashRouter>
-      </FilmContextProvider>
+              </Switch>
+          </HashRouter>
+        </FilmContextProvider>
       </ImportFilmDataContextProvider>
     </div>
   );
