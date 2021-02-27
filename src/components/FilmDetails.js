@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 // import { FilmContext } from '../contexts/FilmContext';
 import { removeFilm } from '../actions/filmActions';
 
 const FilmDetails = (props) => {
     console.log(props.film._id)
-    const { dispatch } = useContext(FilmContext);
+    // const { dispatch } = useContext(FilmContext);
     return ( 
         <li>
             <div className="title">
-                { props.film.title } - { props.film.format }
-                <button onClick={()=>dispatch(removeFilm(props.film._id))}>Delete</button>
+                { props.film.Title } - { props.film.Type }
+                {/* <button onClick={()=>dispatch(removeFilm(props.film._id))}>Delete</button> */}
             </div>
         </li>
      );
