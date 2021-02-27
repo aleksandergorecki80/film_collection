@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { ImportFilmDataContext } from '../../contexts/ImportFilmDataContext';
-import { FilmContext } from '../../contexts/FilmContext';
+// import { ImportFilmDataContext } from '../../contexts/ImportFilmDataContext';
+// import { FilmContext } from '../../contexts/FilmContext';
 
 const ConfirmFilmData = (props) => {
     const { importedFilmsData } = useContext(ImportFilmDataContext ? ImportFilmDataContext : '');

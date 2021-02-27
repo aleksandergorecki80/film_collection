@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { FilmContext } from '../contexts/FilmContext';
+// import { FilmContext } from '../contexts/FilmContext';
 import FilmDetails from './FilmDetails';
 import axios from 'axios';
 

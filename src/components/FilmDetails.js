@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { FilmContext } from '../contexts/FilmContext';
+// import { FilmContext } from '../contexts/FilmContext';
 import { removeFilm } from '../actions/filmActions';
 
 const FilmDetails = (props) => {

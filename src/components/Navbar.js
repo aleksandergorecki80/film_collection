@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { FilmContext } from '../contexts/FilmContext';
+// import { FilmContext } from '../contexts/FilmContext';
 
 const Navbar = () => {
     const { films } = useContext(FilmContext);
