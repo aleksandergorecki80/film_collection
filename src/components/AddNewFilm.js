@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SearchForFilmData from "./filmsFromOmdb/SearchForFilmData";
-import NewFilmForm from "./NewFilmForm";
+import FilmForm from "./FilmForm";
 
 
 const AddNewFilm = () => {
@@ -28,7 +28,7 @@ const AddNewFilm = () => {
                 </label>
             </form>
 
-                {addingMethod === "search" ? <SearchForFilmData /> :  <NewFilmForm />}
+                {addingMethod === "search" ? <SearchForFilmData /> :  <FilmForm />}
 
         </div>
      );

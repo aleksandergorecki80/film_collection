@@ -1,19 +1,28 @@
-import React from 'react';
+import {React, useState} from 'react';
 import { connect } from 'react-redux';
-// import { FilmContext } from '../contexts/FilmContext';
+
 import { removeFilm } from '../actions/filmActions';
+import FilmForm from './FilmForm';
 
 const FilmDetails = (props) => {
-    const onClickHandle = () =>{
+    const [editMode, setEditMode ] = useState(false);
+    const onHandleDelete = () =>{
         return props.dispatch(removeFilm(props.film._id));
     }
+    const onHandleEdit = () => {
+        setEditMode(true)
+    }
     return ( 
+        <div>
         <li>
             <div className="title">
                 { props.film.title } - { props.film.format } - { props.film.condition }
-                <button onClick={onClickHandle}>Delete</button>
+                <button onClick={onHandleDelete}>Delete</button>
+                <button onClick={onHandleEdit}>Edit</button>
             </div>
         </li>
+           { editMode && <FilmForm film={props.film}/> }
+        </div>
      );
 }
  

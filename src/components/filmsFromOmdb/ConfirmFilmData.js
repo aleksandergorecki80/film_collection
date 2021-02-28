@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-// import { ImportFilmDataContext } from '../../contexts/ImportFilmDataContext';
-// import { FilmContext } from '../../contexts/FilmContext';
 
 const ConfirmFilmData = (props) => {
     // const { importedFilmsData } = useContext(ImportFilmDataContext ? ImportFilmDataContext : '');
     // const [title, setTitle] = useState(importedFilmsData.title ? importedFilmsData.title : '');
-    // const { dispatch } = useContext(FilmContext);
+
 
     const handleSubmit = (event) =>{
         event.preventDefault();
