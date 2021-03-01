@@ -1,20 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addFilm } from '../actions/filmActions';
+import { editFilm } from '../actions/filmActions';
 
 class NewFilmForm extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      editMode: this.props.film ? true : false,
       title: this.props.film ? this.props.film.title : '',
       format: this.props.film ? this.props.film.format : 'unknown',
-      condition: this.props.film ? this.props.film.condition : ''
+      condition: this.props.film ? this.props.film.condition : '',
+      _id: this.props.film ? this.props.film._id : '',
     }
   }
   handleSubmit = (event) => {
     event.preventDefault()
     console.log(this.state)
-    this.props.dispatch(addFilm(this.state));
+    if(this.state.editMode)
+    {
+      this.props.dispatch(editFilm(this.state));
+      this.props.onCloseEditMode();
+    } else {
+      this.props.dispatch(addFilm(this.state));
+    }
   };
 
   onChange = (event) => {
@@ -24,7 +33,7 @@ class NewFilmForm extends React.Component {
 
   
    render(){
-    console.log(this.state)
+    console.log(this.props)
     return ( 
       <form onSubmit={this.handleSubmit}>
           <input type="text" placeholder="Film title" 
@@ -63,11 +72,10 @@ class NewFilmForm extends React.Component {
             Used
           </label>
         </div>
-
-
-
-
-         <input type="submit" value="Add film" />
+         {!this.props.film ? 
+            <input type="submit" value="Add film" /> :
+            <input type="submit" value="Update film" />
+          }
       </form>
    );
    }

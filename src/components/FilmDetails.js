@@ -9,19 +9,24 @@ const FilmDetails = (props) => {
     const onHandleDelete = () =>{
         return props.dispatch(removeFilm(props.film._id));
     }
-    const onHandleEdit = () => {
+    const onOpenEditMode = () => {
         setEditMode(true)
     }
+    const onCloseEditMode = () => {
+        setEditMode(false)
+    }
+    console.log(editMode, 'editMode')
     return ( 
+        
         <div>
         <li>
             <div className="title">
                 { props.film.title } - { props.film.format } - { props.film.condition }
                 <button onClick={onHandleDelete}>Delete</button>
-                <button onClick={onHandleEdit}>Edit</button>
+                <button onClick={onOpenEditMode}>Edit</button>
             </div>
         </li>
-           { editMode && <FilmForm film={props.film}/> }
+           { editMode && <FilmForm film={props.film} onCloseEditMode={onCloseEditMode} /> }
         </div>
      );
 }
