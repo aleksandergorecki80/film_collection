@@ -7,6 +7,7 @@ class NewFilmForm extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      redirect: false,
       editMode: this.props.film ? true : false,
       title: this.props.film ? this.props.film.title : '',
       format: this.props.film ? this.props.film.format : 'unknown',
@@ -16,7 +17,6 @@ class NewFilmForm extends React.Component {
   }
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log(this.state)
     if(this.state.editMode)
     {
       this.props.dispatch(editFilm(this.state));
@@ -27,13 +27,15 @@ class NewFilmForm extends React.Component {
   };
 
   onChange = (event) => {
-    console.log(event.target.name)
     this.setState({[event.target.name]: event.target.value})
 }
 
-  
+componentDidUpdate (prevProps, prevState){
+  if (prevProps.films.length !== this.props.films.length) {
+    this.props.history.push("/");
+  }
+}
    render(){
-    console.log(this.props)
     return ( 
       <form onSubmit={this.handleSubmit}>
           <input type="text" placeholder="Film title" 
@@ -81,7 +83,12 @@ class NewFilmForm extends React.Component {
    }
 }
  
-export default connect()(NewFilmForm);
+const mapStateToProps = (state) => {
+  return {
+    films: state.films
+  }
+}
+export default connect(mapStateToProps)(NewFilmForm);
 
 
 // title: action.film.title,

@@ -35,7 +35,6 @@ const filmReducer = (state = mockState, action) => {
         case 'EDIT_FILM':
             
             return state.map((film) => {
-                console.log(action.film._id)
                 if(film._id === action.film._id){
                     return {
                         title: action.film.title,

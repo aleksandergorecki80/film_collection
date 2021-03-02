@@ -3,7 +3,7 @@ import SearchForFilmData from "./filmsFromOmdb/SearchForFilmData";
 import FilmForm from "./FilmForm";
 
 
-const AddNewFilm = () => {
+const AddNewFilm = (props) => {
     const [addingMethod, setAddingMethod ] = useState('search');
     return ( 
         <div>
@@ -28,7 +28,7 @@ const AddNewFilm = () => {
                 </label>
             </form>
 
-                {addingMethod === "search" ? <SearchForFilmData /> :  <FilmForm />}
+                {addingMethod === "search" ? <SearchForFilmData /> :  <FilmForm {...props}/>}
 
         </div>
      );

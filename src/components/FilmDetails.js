@@ -15,7 +15,6 @@ const FilmDetails = (props) => {
     const onCloseEditMode = () => {
         setEditMode(false)
     }
-    console.log(editMode, 'editMode')
     return ( 
         
         <div>
