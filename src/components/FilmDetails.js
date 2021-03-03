@@ -18,7 +18,7 @@ const FilmDetails = (props) => {
 
 
     const onHandleDelete = () =>{
-        return props.dispatch(removeFilm(film._id));
+        return props.removeFilm(film._id);
     }
     const onOpenEditMode = () => {
         setEditMode(true)
@@ -40,6 +40,11 @@ const FilmDetails = (props) => {
          );
     } 
    
+const mapDispatchToProps = (dispatch) => {
+    return {
+        removeFilm: (_id) => { dispatch(removeFilm(_id)) }
+    }
+}
 
 
 const mapStateToProps = (state) => {
@@ -48,4 +53,4 @@ const mapStateToProps = (state) => {
     }
 }
  
-export default connect(mapStateToProps)(FilmDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(FilmDetails);

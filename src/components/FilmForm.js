@@ -19,10 +19,10 @@ class NewFilmForm extends React.Component {
     event.preventDefault()
     if(this.state.editMode)
     {
-      this.props.dispatch(editFilm(this.state));
+      this.props.editFilm(this.state);
       this.props.onCloseEditMode();
     } else {
-      this.props.dispatch(addFilm(this.state));
+      this.props.addFilm(this.state);
     }
   };
 
@@ -82,13 +82,20 @@ componentDidUpdate (prevProps, prevState){
    );
    }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addFilm: (film) => { dispatch(addFilm(film)) },
+    editFilm: (film) => { dispatch(editFilm(film))}
+  }
+};
  
 const mapStateToProps = (state) => {
   return {
     films: state.films
   }
-}
-export default connect(mapStateToProps)(NewFilmForm);
+};
+export default connect(mapStateToProps, mapDispatchToProps)(NewFilmForm);
 
 
 // title: action.film.title,

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 const ConfirmFilmData = (props) => {
-    // const { importedFilmsData } = useContext(ImportFilmDataContext ? ImportFilmDataContext : '');
     // const [title, setTitle] = useState(importedFilmsData.title ? importedFilmsData.title : '');
 
 
