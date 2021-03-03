@@ -1,5 +1,5 @@
 import React from 'react';
-import FilmDetails from './FilmDetails';
+import Film from './Film';
 import { connect } from 'react-redux';
 
 const FilmList = (props) => {
@@ -8,8 +8,7 @@ const FilmList = (props) => {
             <ul>
                 { props.films.map((film)=>{
                     return (
-                        // <FilmDetails film={film} key={film._id} />
-                        <FilmDetails film={film} key={film._id} />
+                        <Film film={film} key={film._id} />
                     )
                 }) }
             </ul>

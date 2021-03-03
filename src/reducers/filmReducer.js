@@ -15,6 +15,7 @@ const filmReducer = (state = mockState, action) => {
     switch(action.type) {
         // case 'LOAD_FILMS':
         //     return action.film
+          
         case 'ADD_FILM':
             return [...state, {
                 title: action.film.title,

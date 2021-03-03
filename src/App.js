@@ -7,7 +7,8 @@ import AddNewFilm from './components/AddNewFilm';
 import ConfirmFilmData from './components/filmsFromOmdb/ConfirmFilmData';
 
 import { BrowserRouter, Route, Router, Switch } from 'react-router-dom';
-import { createBrowserHistory } from 'history'
+import { createBrowserHistory } from 'history';
+import FilmDetails from './components/FilmDetails';
 
 const newHistory = createBrowserHistory();
 
@@ -23,6 +24,7 @@ function App() {
            <Navbar />
           <Route exact path="/" component={FilmList} />
           <Route path="/addNewFilm" component={AddNewFilm} />
+          <Route path="/film/:id" component={FilmDetails} />
         </Provider>
       </BrowserRouter>
 
