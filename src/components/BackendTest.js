@@ -16,7 +16,7 @@ const BackendTest = () => {
 
     }, []);
 
-    {
+    
         if (filmsListFromDatabase) {
            return filmsListFromDatabase.map((film) =>{
                 return (
@@ -30,19 +30,6 @@ const BackendTest = () => {
                     <div>Nothing to display</div>
                 )
             }
-        }
-
-        // {
-        //     filmsListFromDatabase && filmsListFromDatabase.map((film) => {
-        //         return ( 
-        //             <div>
-        //                 Get data
-        //                 {film.title}
-        //             </div> 
-        //             );
-        //     })
-
-        //     }
     }
 
     export default BackendTest;
