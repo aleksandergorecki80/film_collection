@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 import { fetchFilmsFromDB } from '../actions/filmActions';
 
 class FilmList extends React.Component {
-    // constructor(props){
-    //     super(props)
-    // }
     componentDidMount(){
         this.props.fetchFilmsFromDB();
     }
@@ -32,7 +29,6 @@ const mapDispatchToProps = (dispatch) => {
         fetchFilmsFromDB: () => {dispatch(fetchFilmsFromDB())}
     }
 }
- 
 const mapStateToProps = (state) => {
     return {
         films: state.films

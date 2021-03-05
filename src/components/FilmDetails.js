@@ -1,10 +1,7 @@
 import {React, useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-
 import { removeFilm } from '../actions/filmActions';
 import FilmForm from './FilmForm';
-
-
 
 const FilmDetails = (props) => {
     const [ film, setFilm ] = useState('');
@@ -15,7 +12,6 @@ const FilmDetails = (props) => {
         });
         film ? setFilm(film) : props.history.push("/");
     }, [props.films, props.history, props.match.params.id]);
-
 
     const onHandleDelete = () =>{
         return props.removeFilm(film._id);
