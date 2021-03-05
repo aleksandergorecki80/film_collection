@@ -1,5 +1,24 @@
 import axios from 'axios';
 
+export const  fetchFilmsFromDB = () => {
+    return (dispatch) => {
+        return axios.get('/api/movies')
+        .then((res) => {
+            console.log(res.data)
+            dispatch(loadFilmList(res.data))
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
+  
+}
+
+export const loadFilmList = (films) => {
+    return { type: 'LOAD_FILMS', films }
+}
+
+
 export const removeFilm = (_id) => {
     return { type: 'REMOVE_FILM', _id }
 };
@@ -11,7 +30,6 @@ export const removeFilm = (_id) => {
 export const addFilm = (film) => {
     return (dispatch, getState) => {
         // async call to DB
-        console.log(film)
         axios.post('/api/movies', {
             title: film.title,
             format: film.format,
@@ -28,3 +46,4 @@ export const addFilm = (film) => {
 export const editFilm = (film) => {
     return { type: 'EDIT_FILM', film }
 };
+

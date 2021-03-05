@@ -1,21 +1,36 @@
 import React from 'react';
 import Film from './Film';
 import { connect } from 'react-redux';
+import { fetchFilmsFromDB } from '../actions/filmActions';
 
-const FilmList = (props) => {
-    return props.films.length ? ( 
-        <div className="film-list">
-            <ul>
-                { props.films.map((film)=>{
-                    return (
-                        <Film film={film} key={film._id} />
-                    )
-                }) }
-            </ul>
-        </div>
-     ) : (
-         <div className="empty">Nothing to display</div>
-     );
+class FilmList extends React.Component {
+    // constructor(props){
+    //     super(props)
+    // }
+    componentDidMount(){
+        this.props.fetchFilmsFromDB();
+    }
+    render(){
+        return this.props.films.length ? ( 
+            <div className="film-list">
+                <ul>
+                    { this.props.films.map((film)=>{
+                        return (
+                            <Film film={film} key={film._id} />
+                        )
+                    }) }
+                </ul>
+            </div>
+         ) : (
+             <div className="empty">Nothing to display</div>
+         );
+    }
+    }
+    
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchFilmsFromDB: () => {dispatch(fetchFilmsFromDB())}
+    }
 }
  
 const mapStateToProps = (state) => {
@@ -23,4 +38,4 @@ const mapStateToProps = (state) => {
         films: state.films
     }
 }
-export default connect(mapStateToProps)(FilmList)
+export default connect(mapStateToProps, mapDispatchToProps)(FilmList)

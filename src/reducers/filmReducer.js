@@ -1,20 +1,12 @@
 import { v4 as uuidv4 } from 'uuid';
 
-const mockState = [
-    {title: "Rambo", format: "BluRey", condition: "Used", _id:'001'},
-    {title: "Rambo 2", format: "DVD", condition: "New", _id:'002'},
-    {title: "Terminator", format: "BluRey", condition: "Used", _id:'003'},
-    {title: "Terminator 2", format: "DVD", condition: "New", _id:'004'},
-    {title: "Szklana pułapka", format: "BluRey", condition: "Used", _id:'005'},
-    {title: "Szklana pułapka 2", format: "DVD", condition: "New", _id:'006'},
-
-];
+const defaultState = [];
 
 
-const filmReducer = (state = mockState, action) => {
+const filmReducer = (state = defaultState, action) => {
     switch(action.type) {
-        // case 'LOAD_FILMS':
-        //     return action.film
+        case 'LOAD_FILMS':
+            return action.films
           
         case 'ADD_FILM':
             return [...state, {

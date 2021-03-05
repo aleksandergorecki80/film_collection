@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 const Navbar = (props) => {
-    console.log(props)
     return ( 
         <div className='navbar'>
             <h1>The collection of my films.</h1>

@@ -4,9 +4,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import Navbar from './components/Navbar';
 import FilmList from './components/FilmList';
 import AddNewFilm from './components/AddNewFilm';
-import ConfirmFilmData from './components/filmsFromOmdb/ConfirmFilmData';
-import  BackendTest  from "./components/BackendTest";
-import { BrowserRouter, Route } from 'react-router-dom';
+// import ConfirmFilmData from './components/filmsFromOmdb/ConfirmFilmData';
+import { Router, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import FilmDetails from './components/FilmDetails';
 import rootReducer from './reducers/rootReducer';
@@ -26,15 +25,12 @@ function App() {
   return (
     <div className="App">
       <Provider store={store}>
-      <BrowserRouter history={newHistory}>
-
+      <Router history={newHistory}>
         <Navbar />
-        <BackendTest />
         <Route exact path="/" component={FilmList} />
         <Route path="/addNewFilm" component={AddNewFilm} />
         <Route path="/film/:id" component={FilmDetails} />
-
-      </BrowserRouter>
+      </Router>
       </Provider>
 
     </div >
