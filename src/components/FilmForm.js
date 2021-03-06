@@ -4,46 +4,76 @@ import { addFilm } from '../actions/filmActions';
 import { editFilm } from '../actions/filmActions';
 
 class NewFilmForm extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       redirect: false,
-      editMode: this.props.film ? true : false,
-      title: this.props.film ? this.props.film.title : '',
-      format: this.props.film ? this.props.film.format : 'unknown',
-      condition: this.props.film ? this.props.film.condition : '',
-      _id: this.props.film ? this.props.film._id : '',
+      editMode: this.props.match.params.id ? true : false,
+      film: {
+        title: this.props.film ? this.props.film.title : '',
+        format: this.props.film ? this.props.film.format : 'unknown',
+        condition: this.props.film ? this.props.film.condition : '',
+        // _id: this.props.film ? this.props.film._id : '',
+      }
+
     }
   }
   handleSubmit = (event) => {
     event.preventDefault()
-    if(this.state.editMode)
-    {
-      this.props.editFilm(this.state);
-      this.props.onCloseEditMode();
+    if (this.props.match.params.id) {
+      this.props.editFilm(this.state.film, this.props.match.params.id);
+      // this.props.onCloseEditMode();
     } else {
-      this.props.addFilm(this.state);
+      this.props.addFilm(this.state.film);
     }
+    this.props.history.push("/");
   };
 
   onChange = (event) => {
-    this.setState({[event.target.name]: event.target.value})
-}
-
-componentDidUpdate (prevProps, prevState){
-  if (prevProps.films.length !== this.props.films.length) {
-    this.props.history.push("/");
+    this.setState({
+      film: {
+        ...this.state.film,
+        [event.target.name]: event.target.value
+      }
+    })
   }
-}
-   render(){
-    return ( 
+
+  componentDidMount() {
+
+    console.log('componentDidMount in FORM')
+    console.log(this.props)
+
+
+    if(this.props.match.params.id){
+      const film = this.props.films.find((film) => {
+        return film._id === this.props.match.params.id;
+      });
+      this.setState({
+        film: {
+          title: film.title,
+          format: film.format,
+          condition: film.condition
+        }
+      })
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // if (prevProps.films.length !== this.props.films.length) {
+    //   this.props.history.push("/");
+    // }
+    console.log(this.props)
+    console.log('componentDidUpdate FORM')
+  }
+  render() {
+    return (
       <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="Film title" 
-          value={this.state.title}
-          
+        <input type="text" placeholder="Film title"
+          value={this.state.film.title}
+
           onChange={this.onChange} name="title" required />
 
-        <select value={this.state.format} onChange={this.onChange} name="format">
+        <select value={this.state.film.format} onChange={this.onChange} name="format">
           <option value="unknown" disabled required> -- select a format -- </option>
           <option value="DVD">DVD</option>
           <option value="BluRey">BluRey</option>
@@ -53,10 +83,10 @@ componentDidUpdate (prevProps, prevState){
         <div className="radio">
           <label>
             <input
-            name="condition"
+              name="condition"
               type="radio"
               value="New"
-              checked={this.state.condition === "New"}
+              checked={this.state.film.condition === "New"}
               onChange={this.onChange}
             />
             New
@@ -65,31 +95,31 @@ componentDidUpdate (prevProps, prevState){
         <div className="radio">
           <label>
             <input
-            name="condition"
+              name="condition"
               type="radio"
               value="Used"
-              checked={this.state.condition === "Used"}
+              checked={this.state.film.condition === "Used"}
               onChange={this.onChange}
             />
             Used
           </label>
         </div>
-         {!this.props.film ? 
-            <input type="submit" value="Add film" /> :
-            <input type="submit" value="Update film" />
-          }
+        {!this.props.match.params.id ?
+          <input type="submit" value="Add film" /> :
+          <input type="submit" value="Update film" />
+        }
       </form>
-   );
-   }
+    );
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     addFilm: (film) => { dispatch(addFilm(film)) },
-    editFilm: (film) => { dispatch(editFilm(film))}
+    editFilm: (film, id) => { dispatch(editFilm(film, id)) }
   }
 };
- 
+
 const mapStateToProps = (state) => {
   return {
     films: state.films

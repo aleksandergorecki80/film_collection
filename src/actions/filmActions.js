@@ -41,9 +41,9 @@ export const addFilm = (film) => {
     }
 }
 
-export const editFilm = (film) => {
+export const editFilm = (film, _id) => {
     return (dispatch) => {
-        return axios.put(`/api/movies/${film._id}`, {
+        return axios.put(`/api/movies/${_id}`, {
                 title: film.title,
                 format: film.format,
                 condition: film.condition

@@ -1,11 +1,12 @@
 import {React, useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { removeFilm } from '../actions/filmActions';
-import FilmForm from './FilmForm';
+import { Link } from 'react-router-dom';
+// import FilmForm from './FilmForm';
 
 const FilmDetails = (props) => {
     const [ film, setFilm ] = useState('');
-    const [ editMode, setEditMode ] = useState(false);
+    // const [ editMode, setEditMode ] = useState(false);
     useEffect( () =>{
         const film = props.films.find((film) => {
             return film._id === props.match.params.id;
@@ -16,12 +17,12 @@ const FilmDetails = (props) => {
     const onHandleDelete = () =>{
         return props.removeFilm(film._id);
     }
-    const onOpenEditMode = () => {
-        setEditMode(true)
-    }
-    const onCloseEditMode = () => {
-        setEditMode(false)
-    }
+    // const onOpenEditMode = () => {
+    //     setEditMode(true)
+    // }
+    // const onCloseEditMode = () => {
+    //     setEditMode(false)
+    // }
         return ( 
         
             <div>
@@ -29,9 +30,9 @@ const FilmDetails = (props) => {
                <div className="title">
                     { film.title } - { film.format } - { film.condition }
                     <button onClick={onHandleDelete}>Delete</button>
-                    <button onClick={onOpenEditMode}>Edit</button>
+                    <Link to={`/edit_film/${props.match.params.id}`}>Edit</Link>
                 </div>
-               { editMode && <FilmForm film={film} onCloseEditMode={onCloseEditMode} /> } 
+               {/* { editMode && <FilmForm film={film} onCloseEditMode={onCloseEditMode} /> }  */}
             </div>
          );
     } 

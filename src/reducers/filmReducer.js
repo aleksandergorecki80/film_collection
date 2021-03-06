@@ -2,7 +2,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 const defaultState = [];
 
-
 const filmReducer = (state = defaultState, action) => {
     switch(action.type) {
         case 'LOAD_FILMS':
@@ -28,7 +27,7 @@ const filmReducer = (state = defaultState, action) => {
         case 'EDIT_FILM':
             
             return state.map((film) => {
-                if(film._id === action.film._id){
+                if(film._id === action._id){
                     return {
                         title: action.film.title,
                         format: action.film.format,

@@ -4,6 +4,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import Navbar from './components/Navbar';
 import FilmList from './components/FilmList';
 import AddNewFilm from './components/AddNewFilm';
+import FilmForm from './components/FilmForm';
 // import ConfirmFilmData from './components/filmsFromOmdb/ConfirmFilmData';
 import { Router, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
@@ -28,8 +29,9 @@ function App() {
       <Router history={newHistory}>
         <Navbar />
         <Route exact path="/" component={FilmList} />
-        <Route path="/addNewFilm" component={AddNewFilm} />
+        <Route path="/add_film" component={AddNewFilm} />
         <Route path="/film/:id" component={FilmDetails} />
+        <Route path="/edit_film/:id" component={FilmForm} />
       </Router>
       </Provider>
 
