@@ -8,7 +8,7 @@ class FilmList extends React.Component {
         this.props.fetchFilmsFromDB();
     }
     componentDidUpdate(){
-        console.log(this.props.films, 'this.props.films')
+        localStorage.setItem('films', JSON.stringify(this.props.films))
     }
     render(){
         return this.props.films.length ? ( 

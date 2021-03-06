@@ -13,7 +13,6 @@ class NewFilmForm extends React.Component {
         title: this.props.film ? this.props.film.title : '',
         format: this.props.film ? this.props.film.format : 'unknown',
         condition: this.props.film ? this.props.film.condition : '',
-        // _id: this.props.film ? this.props.film._id : '',
       }
 
     }
@@ -22,7 +21,6 @@ class NewFilmForm extends React.Component {
     event.preventDefault()
     if (this.props.match.params.id) {
       this.props.editFilm(this.state.film, this.props.match.params.id);
-      // this.props.onCloseEditMode();
     } else {
       this.props.addFilm(this.state.film);
     }
@@ -39,31 +37,21 @@ class NewFilmForm extends React.Component {
   }
 
   componentDidMount() {
-
-    console.log('componentDidMount in FORM')
-    console.log(this.props)
-
-
     if(this.props.match.params.id){
       const film = this.props.films.find((film) => {
         return film._id === this.props.match.params.id;
       });
-      this.setState({
-        film: {
-          title: film.title,
-          format: film.format,
-          condition: film.condition
-        }
-      })
-    }
-  }
+      film ? 
+        this.setState({
+          film: {
+            title: film.title,
+            format: film.format,
+            condition: film.condition
+          }
+        })
+      : this.props.history.push("/");
 
-  componentDidUpdate(prevProps, prevState) {
-    // if (prevProps.films.length !== this.props.films.length) {
-    //   this.props.history.push("/");
-    // }
-    console.log(this.props)
-    console.log('componentDidUpdate FORM')
+    }
   }
   render() {
     return (

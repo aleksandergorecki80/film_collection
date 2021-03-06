@@ -1,6 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
 
-const defaultState = [];
+const localData = () => {
+    const storage = localStorage.getItem('films')
+    return storage ? JSON.parse(storage) : [];
+}
+
+const defaultState = localData();
 
 const filmReducer = (state = defaultState, action) => {
     switch(action.type) {
