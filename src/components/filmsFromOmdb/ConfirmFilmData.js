@@ -1,23 +1,68 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const ConfirmFilmData = (props) => {
-    // const [title, setTitle] = useState(importedFilmsData.title ? importedFilmsData.title : '');
+class ConfirmData extends React.Component {
 
-
-    const handleSubmit = (event) =>{
-        event.preventDefault();
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: this.props.importedData.title,
+      year: this.props.importedData.year
+    };
+  }
+  onChange = (event) => {
+    event.preventDefault();
+    console.log(event.target.value);
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(event.target);
+  };
+  componentDidUpdate(prevProps, prevState){
+    if(prevState.title !== this.props.importedData.title){
+      this.setState({
+        title: this.props.importedData.title,
+        year: this.props.importedData.year
+      })
     }
-    return ( 
-        <div>
-            <p>confirm data</p>
-            <form onSubmit={handleSubmit}>
-                {/* <input type="text" value={title} onChange={(event)=>{setTitle(event.target.value)}}/> */}
-                <input type="text" />
-                <input type="submit" value="Save" />
-            </form>
-        </div>
-     );
+  }
+  onCancelHandler = () => {
+    this.setState({
+      title: '',
+      year: ''
+    })
+  }
+  render() {
+    return (
+      <div>
+        <p>confirm data</p>
+        <form onSubmit={this.handleSubmit}>
+          {/* <input type="text" value={title} onChange={(event)=>{setTitle(event.target.value)}}/> */}
+          <input
+            type="text"
+            placeholder="Film title"
+            value={this.state.title}
+            onChange={this.onChange}
+            name="title"
+            required
+          />
+                    <input
+            type="text"
+            placeholder="Year"
+            value={this.state.year}
+            onChange={this.onChange}
+            name="year"
+          />
+          <input type="submit" value="Save" />
+          <button onClick={this.onCancelHandler}>Cancel</button>
+        </form>
+      </div>
+    );
+  }
 }
- 
-export default ConfirmFilmData;
+
+
+
+export default ConfirmData;

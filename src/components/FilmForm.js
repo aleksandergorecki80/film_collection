@@ -3,12 +3,10 @@ import { connect } from 'react-redux';
 import { addFilm } from '../actions/filmActions';
 import { editFilm } from '../actions/filmActions';
 
-class NewFilmForm extends React.Component {
+class FilmForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      redirect: false,
-      editMode: this.props.match.params.id ? true : false,
       film: {
         title: this.props.film ? this.props.film.title : '',
         format: this.props.film ? this.props.film.format : 'unknown',
@@ -21,10 +19,12 @@ class NewFilmForm extends React.Component {
     event.preventDefault()
     if (this.props.match.params.id) {
       this.props.editFilm(this.state.film, this.props.match.params.id);
+      this.props.history.push("/");
     } else {
       this.props.addFilm(this.state.film);
+      this.props.history.push("/");
     }
-    this.props.history.push("/");
+    
   };
 
   onChange = (event) => {
@@ -37,6 +37,7 @@ class NewFilmForm extends React.Component {
   }
 
   componentDidMount() {
+    // EDITION OF EGZISTING FILM
     if(this.props.match.params.id){
       const film = this.props.films.find((film) => {
         return film._id === this.props.match.params.id;
@@ -50,7 +51,10 @@ class NewFilmForm extends React.Component {
           }
         })
       : this.props.history.push("/");
-
+    }
+    // CONFIRMING DATA OF FILM IMPORTED FROM OMDB API
+    if(this.props.match.path === '/confirm_data'){
+      console.log(this.props.importedData)
     }
   }
   render() {
@@ -110,10 +114,10 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    films: state.films
+    films: state.films,
   }
 };
-export default connect(mapStateToProps, mapDispatchToProps)(NewFilmForm);
+export default connect(mapStateToProps, mapDispatchToProps)(FilmForm);
 
 
 // title: action.film.title,

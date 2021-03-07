@@ -1,53 +1,45 @@
-import {React, useState, useEffect} from 'react';
+import { React, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { removeFilm } from '../actions/filmActions';
 import { Link } from 'react-router-dom';
-// import FilmForm from './FilmForm';
 
 const FilmDetails = (props) => {
-    const [ film, setFilm ] = useState('');
-    // const [ editMode, setEditMode ] = useState(false);
-    useEffect( () =>{
-        const film = props.films.find((film) => {
-            return film._id === props.match.params.id;
-        });
-        film ? setFilm(film) : props.history.push("/");
-    }, [props.films, props.history, props.match.params.id]);
+  const [film, setFilm] = useState('');
+  // const [ editMode, setEditMode ] = useState(false);
+  useEffect(() => {
+    const film = props.films.find((film) => {
+      return film._id === props.match.params.id;
+    });
+    film ? setFilm(film) : props.history.push('/');
+  }, [props.films, props.history, props.match.params.id]);
 
-    const onHandleDelete = () =>{
-        return props.removeFilm(film._id);
-    }
-    // const onOpenEditMode = () => {
-    //     setEditMode(true)
-    // }
-    // const onCloseEditMode = () => {
-    //     setEditMode(false)
-    // }
-        return ( 
-        
-            <div>
-    
-               <div className="title">
-                    { film.title } - { film.format } - { film.condition }
-                    <button onClick={onHandleDelete}>Delete</button>
-                    <Link to={`/edit_film/${props.match.params.id}`}>Edit</Link>
-                </div>
-               {/* { editMode && <FilmForm film={film} onCloseEditMode={onCloseEditMode} /> }  */}
-            </div>
-         );
-    } 
-   
+  const onHandleDelete = () => {
+    return props.removeFilm(film._id);
+  };
+  return (
+    <div>
+      <div className="title">
+        {film.title} - {film.format} - {film.condition}
+        <button onClick={onHandleDelete}>Delete</button>
+        <Link to={`/edit_film/${props.match.params.id}`}>Edit</Link>
+      </div>
+      {/* { editMode && <FilmForm film={film} onCloseEditMode={onCloseEditMode} /> }  */}
+    </div>
+  );
+};
+
 const mapDispatchToProps = (dispatch) => {
-    return {
-        removeFilm: (_id) => { dispatch(removeFilm(_id)) }
-    }
-}
-
+  return {
+    removeFilm: (_id) => {
+      dispatch(removeFilm(_id));
+    },
+  };
+};
 
 const mapStateToProps = (state) => {
-    return {
-        films: state.films
-    }
-}
- 
+  return {
+    films: state.films,
+  };
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(FilmDetails);

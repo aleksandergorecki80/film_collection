@@ -30,7 +30,6 @@ class SearchForFilmData extends React.Component {
     });
   };
   fetchFromOmdb = () => {
-    console.log(this.state.page);
     axios
       .get(
         `http://www.omdbapi.com/?s=${this.state.title}&apikey=${process.env.REACT_APP_API_KEY}&page=${this.state.page}`
