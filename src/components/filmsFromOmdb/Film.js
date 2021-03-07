@@ -12,7 +12,7 @@ const Film = ({ movie }) => {
         <li>
             <div>
                 {`Id: ${movie.imdbID} - Title: ${movie.Title}`}
-                {/* <img src={movie.Poster} /> */}
+                {/* <img src={movie.Poster} alt="poster"/> */}
                 <Link to="/confirmData">
                     <button onClick={onClickHandle}>Add to my collection</button>
                 </Link>
