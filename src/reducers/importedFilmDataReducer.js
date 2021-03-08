@@ -4,6 +4,7 @@ const importedFilmDataReducer = (state = '', action) => {
       return {
         title: action.film.Title,
         year: action.film.Year,
+        poster: action.film.Poster
       };
     default:
       return state;

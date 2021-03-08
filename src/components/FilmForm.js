@@ -11,6 +11,8 @@ class FilmForm extends React.Component {
         title: this.props.film ? this.props.film.title : '',
         format: this.props.film ? this.props.film.format : 'unknown',
         condition: this.props.film ? this.props.film.condition : '',
+        year: this.props.film ? this.props.film.year : '',
+        poster: this.props.film ? this.props.film.poster : '',
       }
 
     }
@@ -47,14 +49,23 @@ class FilmForm extends React.Component {
           film: {
             title: film.title,
             format: film.format,
-            condition: film.condition
+            condition: film.condition,
+            year: film.year,
+            poster: film.poster
           }
         })
       : this.props.history.push("/");
     }
     // CONFIRMING DATA OF FILM IMPORTED FROM OMDB API
     if(this.props.match.path === '/confirm_data'){
-      console.log(this.props.importedData)
+      this.setState({
+        film: {
+          ...this.state.film,
+          title: this.props.importedData.title,
+          year: this.props.importedData.year,
+          poster: this.props.importedData.poster
+        }
+      })
     }
   }
   render() {
@@ -62,16 +73,25 @@ class FilmForm extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <input type="text" placeholder="Film title"
           value={this.state.film.title}
-
-          onChange={this.onChange} name="title" required />
-
+          onChange={this.onChange} 
+          name="title" 
+          required 
+        />
+        <input type="text" placeholder="Year"
+          value={this.state.film.year}
+          onChange={this.onChange} 
+          name="year"  
+        />
+        <input type="text" placeholder="Poster"
+          value={this.state.film.poster}
+          onChange={this.onChange} 
+          name="poster"  
+        />
         <select value={this.state.film.format} onChange={this.onChange} name="format">
           <option value="unknown" disabled required> -- select a format -- </option>
           <option value="DVD">DVD</option>
           <option value="BluRey">BluRey</option>
         </select>
-        <textarea></textarea>
-
         <div className="radio">
           <label>
             <input
@@ -115,6 +135,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     films: state.films,
+    importedData: state.importedData
   }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(FilmForm);

@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 const FilmDetails = (props) => {
   const [film, setFilm] = useState('');
-  // const [ editMode, setEditMode ] = useState(false);
   useEffect(() => {
     const film = props.films.find((film) => {
       return film._id === props.match.params.id;
@@ -23,7 +22,6 @@ const FilmDetails = (props) => {
         <button onClick={onHandleDelete}>Delete</button>
         <Link to={`/edit_film/${props.match.params.id}`}>Edit</Link>
       </div>
-      {/* { editMode && <FilmForm film={film} onCloseEditMode={onCloseEditMode} /> }  */}
     </div>
   );
 };

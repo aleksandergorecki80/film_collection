@@ -5,7 +5,6 @@ import Navbar from './components/Navbar';
 import FilmList from './components/FilmList';
 import AddNewFilm from './components/AddNewFilm';
 import FilmForm from './components/FilmForm';
-// import ConfirmFilmData from './components/filmsFromOmdb/ConfirmFilmData';
 import { Router, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import FilmDetails from './components/FilmDetails';
@@ -14,13 +13,11 @@ import thunk from 'redux-thunk';
 
 const newHistory = createBrowserHistory();
 
-
 const store = createStore(rootReducer, 
   compose(
   applyMiddleware(thunk),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
   );
-
 
 function App() {
   return (
@@ -32,6 +29,7 @@ function App() {
         <Route path="/add_film" component={AddNewFilm} />
         <Route path="/film/:id" component={FilmDetails} />
         <Route path="/edit_film/:id" component={FilmForm} />
+        <Route path="/confirm_data" component={FilmForm} />
       </Router>
       </Provider>
 

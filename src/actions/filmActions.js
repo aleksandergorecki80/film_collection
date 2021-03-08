@@ -28,26 +28,18 @@ export const removeFilm = (_id) => {
 export const addFilm = (film) => {
     return (dispatch, getState) => {
         // async call to DB
-        axios.post('/api/movies', {
-            title: film.title,
-            format: film.format,
-            condition: film.condition
-        }).then(()=>{
+        axios.post('/api/movies', film).then(()=>{
             dispatch({ type: 'ADD_FILM', film});
         }).catch((err)=>{
             console.log(err);
         })
-        
     }
 }
 
 export const editFilm = (film, _id) => {
     return (dispatch) => {
-        return axios.put(`/api/movies/${_id}`, {
-                title: film.title,
-                format: film.format,
-                condition: film.condition
-        }).then(() => {
+        return axios.put(`/api/movies/${_id}`, film)
+        .then(() => {
             dispatch({ type: 'EDIT_FILM', film });
         }).catch((err) => {
             console.log(err)

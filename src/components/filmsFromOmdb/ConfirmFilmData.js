@@ -11,14 +11,12 @@ class ConfirmData extends React.Component {
   }
   onChange = (event) => {
     event.preventDefault();
-    console.log(event.target.value);
     this.setState({
       [event.target.name]: event.target.value,
     });
   };
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event.target);
   };
   componentDidUpdate(prevProps, prevState){
     if(prevState.title !== this.props.importedData.title){

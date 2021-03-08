@@ -1,19 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addImportedFilm } from '../../actions/importedFilmActions';
+import { Link } from 'react-router-dom';
 
 const Film = (props) => {
     const onClickHandle = () => {
-        console.log(props);
         props.addImportedFilm(props.movie);
     }
     return ( 
         <li>
             <div>
                 {`Id: ${props.movie.imdbID} - Title: ${props.movie.Title}`}
-                {/* <img src={movie.Poster} alt="poster"/> */}
+                {/* <img src={props.movie.Poster} alt="poster"/> */}
 
-                    <button onClick={onClickHandle}>Add to my collection</button>
+                    {/* <button onClick={onClickHandle}>Add to my collection</button> */}
+                    <Link to="/confirm_data" onClick={onClickHandle}>Add to my collection</Link>
 
             </div>
         </li>
