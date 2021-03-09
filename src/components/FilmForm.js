@@ -7,12 +7,14 @@ class FilmForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      // formData: new FormData(),
       film: {
         title: this.props.film ? this.props.film.title : '',
         format: this.props.film ? this.props.film.format : 'unknown',
         condition: this.props.film ? this.props.film.condition : '',
         year: this.props.film ? this.props.film.year : '',
-        poster: this.props.film ? this.props.film.poster : '',
+        posterName: this.props.film ? this.props.film.poster : '',
+        posterFile: '',
       }
 
     }
@@ -35,6 +37,16 @@ class FilmForm extends React.Component {
         ...this.state.film,
         [event.target.name]: event.target.value
       }
+    })
+  }
+
+  onHanleFile = (event) => {
+    this.setState({
+      film: {
+        ...this.state.film,
+      posterFile: event.target.files[0],
+      posterName: event.target.files[0].name
+    }
     })
   }
 
@@ -82,11 +94,6 @@ class FilmForm extends React.Component {
           onChange={this.onChange} 
           name="year"  
         />
-        <input type="text" placeholder="Poster"
-          value={this.state.film.poster}
-          onChange={this.onChange} 
-          name="poster"  
-        />
         <select value={this.state.film.format} onChange={this.onChange} name="format">
           <option value="unknown" disabled required> -- select a format -- </option>
           <option value="DVD">DVD</option>
@@ -116,6 +123,10 @@ class FilmForm extends React.Component {
             Used
           </label>
         </div>
+        <div>
+          <input type="file" onChange={this.onHanleFile} />
+          <label></label>
+        </div>
         {!this.props.match.params.id ?
           <input type="submit" value="Add film" /> :
           <input type="submit" value="Update film" />
@@ -127,7 +138,7 @@ class FilmForm extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addFilm: (film) => { dispatch(addFilm(film)) },
+    addFilm: (film, formData) => { dispatch(addFilm(film, formData)) },
     editFilm: (film, id) => { dispatch(editFilm(film, id)) }
   }
 };

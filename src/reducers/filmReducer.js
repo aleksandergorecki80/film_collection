@@ -16,12 +16,12 @@ const filmReducer = (state = defaultState, action) => {
             return [...state, {
                 title: action.film.title,
                 format: action.film.format,
-                poster: action.film.poster,
-                description: action.film.description,
+                posterName: action.film.posterName,
+                // description: action.film.description,
                 year: action.film.year,
-                genere: action.film.genere,
-                date: action.film.date,
-                isInCollection: action.film.isInCollection,
+                // genere: action.film.genere,
+                // date: action.film.date,
+                // isInCollection: action.film.isInCollection,
                 condition: action.film.condition,
                 _id: uuidv4()
             }];
