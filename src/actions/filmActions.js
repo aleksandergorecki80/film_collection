@@ -26,15 +26,14 @@ export const removeFilm = (_id) => {
 };
 
 export const addFilm = (film) => {
-    console.log(film)
     return (dispatch, getState) => {
         // async call to DB
-        const formData = new FormData();
-        for(const field in film){
-            console.log(`Field: ${field} Value: ${film[field]}`);
-            formData.append([field], film[field])
-        }
-        axios.post('/api/movies', formData).then(()=>{
+        // const formData = new FormData();
+        // for(const field in film){
+        //     console.log(`Field: ${field} Value: ${film[field]}`);
+        //     formData.append([field], film[field])
+        // }
+        axios.post('/api/movies', film).then(()=>{
             dispatch({ type: 'ADD_FILM', film});
         }).catch((err)=>{
             console.log(err);

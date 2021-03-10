@@ -2,19 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addFilm } from '../actions/filmActions';
 import { editFilm } from '../actions/filmActions';
+import axios from 'axios';
 
 class FilmForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       // formData: new FormData(),
+      posterFile: '',
       film: {
         title: this.props.film ? this.props.film.title : '',
         format: this.props.film ? this.props.film.format : 'unknown',
         condition: this.props.film ? this.props.film.condition : '',
         year: this.props.film ? this.props.film.year : '',
-        posterName: this.props.film ? this.props.film.poster : '',
-        posterFile: '',
+        posterName: this.props.film ? this.props.film.posterName : '',
       }
 
     }
@@ -41,12 +42,19 @@ class FilmForm extends React.Component {
   }
 
   onHanleFile = (event) => {
-    this.setState({
-      film: {
-        ...this.state.film,
-      posterFile: event.target.files[0],
-      posterName: event.target.files[0].name
-    }
+    const formData = new FormData();  
+    formData.append('posterFile', event.target.files[0]);
+    axios.post('/api/movies/upload', formData)
+    .then((res) => {
+      this.setState({
+        film: {
+          ...this.state.film,
+        posterName: res.data.filename
+      }
+      })
+    })
+    .catch((err) => {
+      console.log(err)
     })
   }
 
@@ -63,7 +71,7 @@ class FilmForm extends React.Component {
             format: film.format,
             condition: film.condition,
             year: film.year,
-            poster: film.poster
+            posterName: film.posterName
           }
         })
       : this.props.history.push("/");
@@ -124,6 +132,7 @@ class FilmForm extends React.Component {
           </label>
         </div>
         <div>
+          {this.state.film.posterName && <img src={`/uploads/${this.state.film.posterName}`} alt="cover"/>}
           <input type="file" onChange={this.onHanleFile} />
           <label></label>
         </div>

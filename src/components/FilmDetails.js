@@ -19,6 +19,7 @@ const FilmDetails = (props) => {
     <div>
       <div className="title">
         {film.title} - {film.format} - {film.condition}
+        <p><img src={`/uploads/${film.posterName}`} alt="cover"/></p>
         <button onClick={onHandleDelete}>Delete</button>
         <Link to={`/edit_film/${props.match.params.id}`}>Edit</Link>
       </div>
