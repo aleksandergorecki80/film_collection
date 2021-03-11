@@ -8,7 +8,6 @@ class FilmForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // formData: new FormData(),
       posterFile: '',
       film: {
         title: this.props.film ? this.props.film.title : '',
@@ -83,7 +82,7 @@ class FilmForm extends React.Component {
           ...this.state.film,
           title: this.props.importedData.title,
           year: this.props.importedData.year,
-          poster: this.props.importedData.poster
+          posterName: this.props.importedData.posterName
         }
       })
     }
@@ -132,7 +131,10 @@ class FilmForm extends React.Component {
           </label>
         </div>
         <div>
-          {this.state.film.posterName && <img src={`/uploads/${this.state.film.posterName}`} alt="cover"/>}
+          {(this.state.film.posterName && !this.state.film.posterName.startsWith("https://")) ? 
+            <img src={`/uploads/${this.state.film.posterName}`} alt="cover"/>
+            : <img src={this.state.film.posterName} alt="cover"/>
+          }
           <input type="file" onChange={this.onHanleFile} />
           <label></label>
         </div>
@@ -159,14 +161,3 @@ const mapStateToProps = (state) => {
   }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(FilmForm);
-
-
-// title: action.film.title,
-// format: action.film.format,
-// poster: action.film.poster,
-// description: action.film.description,
-// year: action.film.year,
-// genere: action.film.genere,
-// date: action.film.date,
-// isInCollection: action.film.isInCollection,
-// condition: action.film.condition,

@@ -37,7 +37,6 @@ class ConfirmData extends React.Component {
       <div>
         <p>confirm data</p>
         <form onSubmit={this.handleSubmit}>
-          {/* <input type="text" value={title} onChange={(event)=>{setTitle(event.target.value)}}/> */}
           <input
             type="text"
             placeholder="Film title"

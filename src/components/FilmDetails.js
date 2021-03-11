@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { removeFilm } from '../actions/filmActions';
 import { Link } from 'react-router-dom';
@@ -15,11 +15,18 @@ const FilmDetails = (props) => {
   const onHandleDelete = () => {
     return props.removeFilm(film._id);
   };
+  
   return (
     <div>
       <div className="title">
-        {film.title} - {film.format} - {film.condition}
-        <p><img src={`/uploads/${film.posterName}`} alt="cover"/></p>
+        {film.title} - ({film.year}) - {film.format} - {film.condition}
+        <p>
+          {
+            (film.posterName !== undefined && film.posterName.startsWith('https://'))
+            ? <img src={film.posterName} alt="cover"/>
+            : <img src={`/uploads/${film.posterName}`} alt="cover"/>
+          }
+        </p>
         <button onClick={onHandleDelete}>Delete</button>
         <Link to={`/edit_film/${props.match.params.id}`}>Edit</Link>
       </div>
