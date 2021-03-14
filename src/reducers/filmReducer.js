@@ -26,7 +26,6 @@ const filmReducer = (state = defaultState, action) => {
                 return film._id !== action._id
             });
         case 'EDIT_FILM':
-            
             return state.map((film) => {
                 if(film._id === action._id){
                     return {
