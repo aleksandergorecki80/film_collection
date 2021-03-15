@@ -3,7 +3,7 @@ import Film from './Film';
 import { connect } from 'react-redux';
 import { fetchFilmsFromDB } from '../actions/filmActions';
 
-class FilmList extends React.Component {
+export class FilmList extends React.Component {
   componentDidMount() {
     this.props.fetchFilmsFromDB();
   }
