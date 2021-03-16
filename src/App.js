@@ -1,4 +1,4 @@
-import './App.css';
+// import './App.css';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import Navbar from './components/Navbar';

@@ -18,17 +18,18 @@ const FilmDetails = (props) => {
   
   return (
     <div>
-      <div className="title">
-        {film.title} - ({film.year}) - {film.format} - {film.condition}
-        <p>
+      <div className="film-details">
+      <p>
           {
             (film.posterName !== undefined && film.posterName.startsWith('https://'))
             ? <img src={film.posterName} alt="cover"/>
             : <img src={`/uploads/${film.posterName}`} alt="cover"/>
           }
         </p>
-        <button onClick={onHandleDelete}>Delete</button>
-        <Link to={`/edit_film/${props.match.params.id}`}>Edit</Link>
+        {film.title} - ({film.year}) - {film.format} - {film.condition}
+
+        <button onClick={onHandleDelete} className="button">Delete</button>
+        <Link to={`/edit_film/${props.match.params.id}`}><button className="button">Edit</button></Link>
       </div>
     </div>
   );
