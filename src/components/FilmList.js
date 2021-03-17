@@ -12,12 +12,12 @@ export class FilmList extends React.Component {
   }
   render() {
     return this.props.films.length ? (
-      <div className="film-list">
-        <ul>
+      <div className="films-list">
+
           {this.props.films.map((film) => {
             return <Film film={film} key={film._id} />;
           })}
-        </ul>
+
       </div>
     ) : (
       <div className="empty">Nothing to display</div>

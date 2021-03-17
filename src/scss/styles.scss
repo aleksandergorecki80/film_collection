@@ -3,6 +3,20 @@
     color: $card-font-color;
 }
 /* mobile styles */
+.films-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.thumbnail {
+    text-align: center;
+    background-color: gray;
+    .thumbnail-cover {
+        width: 150px;
+    }
+}
+
 
 /* small tablets styles */
 @media screen and (min-width: 620px){
@@ -11,10 +25,17 @@
 
 /* large tablets and laptops styles */
 @media screen and (min-width: 960px){
-
+    body {
+        font-size: 18px;
+    }
 }
 
 /* desktop styles */
 @media screen and (min-width: 1200px){
-
+    body {
+        font-size: 20px;
+    }
+    .films-list {
+        grid-template-columns: repeat(12, 1fr);
+    }
 }
