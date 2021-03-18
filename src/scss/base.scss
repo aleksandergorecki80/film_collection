@@ -19,26 +19,35 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: $background-color;
-    color: $font-color;
-    
-  }
+    color: $font-color;    
+}
 
-.button {
+.btn {
     display: block;
     border: none;
     color: $button-font-color;
     padding: 20px;
-    background-color: $button-background-color;
     font-size: 1rem;
     cursor: pointer;
-    text-transform: uppercase;
-    width: 60%;
+    text-transform: uppercase;  
     text-align: center;
     margin: 10px 0;
 }
+.btn:hover {
+  background-color: darken($button-background-color, 20%)
+}
 
-.button:hover {
-    background-color: darken($button-background-color, 20%)
+.btn-delete {
+  background-color: $button-background-color;
+  width: 60%;
+}
+
+.btn-add {
+  background-color: gray;
+}
+
+.a-no-underline {
+  text-decoration: none !important;
 }
 
 input[type="text"], select {

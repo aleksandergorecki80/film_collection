@@ -28,8 +28,10 @@ const FilmDetails = (props) => {
         </p>
         {film.title} - ({film.year}) - {film.format} - {film.condition}
 
-        <button onClick={onHandleDelete} className="button">Delete</button>
-        <Link to={`/edit_film/${props.match.params.id}`}><button className="button">Edit</button></Link>
+        <button onClick={onHandleDelete} className="btn btn-delete">Delete</button>
+        <Link to={`/edit_film/${props.match.params.id}`} className="a-no-underline">
+          <button className="btn btn-delete">Edit</button>
+        </Link>
       </div>
     </div>
   );

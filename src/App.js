@@ -21,7 +21,7 @@ const store = createStore(rootReducer,
 
 function App() {
   return (
-    <div className="App">
+    <div className="App container">
       <Provider store={store}>
       <Router history={newHistory}>
         <Navbar />

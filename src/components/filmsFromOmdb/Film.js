@@ -8,15 +8,14 @@ const Film = (props) => {
     props.addImportedFilm(props.movie);
   };
   return (
-    <li>
-      <div>
-        {`Id: ${props.movie.imdbID} - Title: ${props.movie.Title}`}
-        <img src={props.movie.Poster} alt="poster" />
-        <Link to="/confirm_data" onClick={onClickHandle}>
+      <div className="thumbnail">
+        <img src={props.movie.Poster} alt="poster" className="thumbnail-cover"/>
+        {`${props.movie.Title}`}
+        <Link to="/confirm_data" onClick={onClickHandle} className="btn btn-add a-no-underline">
           Add to my collection
         </Link>
       </div>
-    </li>
+
   );
 };
 
