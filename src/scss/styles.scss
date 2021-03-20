@@ -1,22 +1,28 @@
 .film-details{
-    background-color: $card-background-color;
-    color: $card-font-color;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 /* mobile styles */
 .container {
     padding: 10px;
 }
-.navbar {
+.header {
+    .navbar {
+        display: none;
+    }
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    margin-bottom: 1em;
 }
+
 .films-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
 }
-
 .thumbnail {
     text-align: center;
     // background-color: gray;
@@ -31,6 +37,18 @@
     .films-list {
         grid-template-columns: repeat(4, 1fr);
     }
+    .header {
+        .navbar {
+            display: block;
+        }
+        .hamburger-menu {
+            display: none;
+        }
+        .btn-nav {
+            display: inline-block;
+            width: 10em;
+        }
+    }
 }
 
 /* large tablets and laptops styles */
@@ -40,6 +58,12 @@
     }
     .films-list {
         grid-template-columns: repeat(4, 1fr);
+    }
+    .header {
+        .btn-nav {
+            display: inline-block;
+            width: 15em;
+        }
     }
 }
 
@@ -54,5 +78,11 @@
     }
     .films-list {
         grid-template-columns: repeat(6, 1fr);
+    }
+    .header {
+        .btn-nav {
+            display: inline-block;
+            width: 20em;
+        }
     }
 }

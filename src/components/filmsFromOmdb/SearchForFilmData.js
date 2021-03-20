@@ -50,7 +50,7 @@ class SearchForFilmData extends React.Component {
   render() {
     return (
       <div>
-        <p>Search in OMDb</p>
+        {/* <p>Search in OMDb</p> */}
         <form onSubmit={this.onSubmitHandler}>
           <input
             name="title"

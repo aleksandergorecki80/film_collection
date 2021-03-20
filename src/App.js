@@ -1,7 +1,9 @@
 // import './App.css';
+import React , { useState } from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
-import Navbar from './components/Navbar';
+import Modal from './components/Modal';
+import Header from './components/Header';
 import FilmList from './components/FilmList';
 import AddNewFilm from './components/AddNewFilm';
 import FilmForm from './components/FilmForm';
@@ -19,12 +21,14 @@ const store = createStore(rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
   );
 
-function App() {
+const App = () => {
+  const [showModal, setShowModal] = useState(false);
   return (
     <div className="App container">
       <Provider store={store}>
       <Router history={newHistory}>
-        <Navbar />
+        {showModal && <Modal />}
+        <Header showModal={showModal} setShowModal={setShowModal} />
         <Route exact path="/" component={FilmList} />
         <Route path="/add_film" component={AddNewFilm} />
         <Route path="/film/:id" component={FilmDetails} />

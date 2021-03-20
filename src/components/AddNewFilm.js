@@ -6,32 +6,16 @@ const AddNewFilm = (props) => {
   const [addingMethod, setAddingMethod] = useState('search');
   return (
     <div>
-      <form>
-        <label>
-          <input
-            type="radio"
-            name="adding-method"
-            value="search"
-            onChange={(e) => {
-              setAddingMethod(e.target.value);
-            }}
-            checked={addingMethod === 'search'}
-          />
-          <span>Serach in OMDb</span>
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="adding-method"
-            value="form"
-            onChange={(e) => {
-              setAddingMethod(e.target.value);
-            }}
-            checked={addingMethod === 'form'}
-          />
-          <span>Add data manually</span>
-        </label>
-      </form>
+      <button 
+          onClick={() => {setAddingMethod('search')}}
+          className="btn btn-add btn-inline"
+        >Serach in OMDb
+      </button>
+      <button 
+        onClick={() => {setAddingMethod('')}}
+        className="btn btn-add"
+        >Add data manually
+      </button>
       {addingMethod === 'search' ? (
         <SearchForFilmData />
       ) : (
