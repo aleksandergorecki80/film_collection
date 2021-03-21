@@ -89,7 +89,7 @@ class FilmForm extends React.Component {
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="content">
         <input type="text" placeholder="Film title"
           value={this.state.film.title}
           onChange={this.onChange} 
@@ -139,8 +139,8 @@ class FilmForm extends React.Component {
           <label></label>
         </div>
         {!this.props.match.params.id ?
-          <input type="submit" value="Add film" /> :
-          <input type="submit" value="Update film" />
+          <input type="submit" value="Add film" className="btn btn-add"/> :
+          <input type="submit" value="Update film" className="btn btn-add"/>
         }
       </form>
     );

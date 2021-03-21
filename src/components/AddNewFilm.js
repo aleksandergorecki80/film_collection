@@ -4,25 +4,30 @@ import FilmForm from './FilmForm';
 
 const AddNewFilm = (props) => {
   const [addingMethod, setAddingMethod] = useState('search');
-  return (
-    <div>
-      <button 
-          onClick={() => {setAddingMethod('search')}}
-          className="btn btn-add btn-inline"
-        >Serach in OMDb
-      </button>
-      <button 
+
+  if(addingMethod) {
+    return (
+      <div className="content">
+        <button 
         onClick={() => {setAddingMethod('')}}
         className="btn btn-add"
-        >Add data manually
+        >Switch to: Add data manually
       </button>
-      {addingMethod === 'search' ? (
-        <SearchForFilmData />
-      ) : (
+      <SearchForFilmData />
+      </div>
+    )
+  } else {
+    return (
+      <div className="content">
+        <button 
+          onClick={() => {setAddingMethod('search')}}
+          className="btn btn-add"
+        >Switch to: Serach in OMDb
+      </button>
         <FilmForm {...props} />
-      )}
-    </div>
-  );
+      </div>
+    )
+  }
 };
 
 export default AddNewFilm;

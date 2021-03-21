@@ -1,6 +1,6 @@
+import React from 'react';
 import axios from 'axios';
 import FilmsList from './FilmsList';
-import React from 'react';
 
 class SearchForFilmData extends React.Component {
   constructor(props) {
@@ -50,39 +50,42 @@ class SearchForFilmData extends React.Component {
   render() {
     return (
       <div>
-        {/* <p>Search in OMDb</p> */}
-        <form onSubmit={this.onSubmitHandler}>
+        <form onSubmit={this.onSubmitHandler} className="content">
           <input
             name="title"
             type="text"
-            placeholder="Search Movie"
+            placeholder="Search Movie in OMDB"
             onChange={this.onHandleChange}
           />
-          <input type="submit" value="Search" />
+          <input type="submit" value="Search" className="btn btn-add" />
         </form>
         {this.state.moviesList ? (
           <FilmsList moviesList={this.state.moviesList} />
         ) : (
-          'nothing to display'
+          <p>Nothing to display</p>
         )}
-        {this.state.moviesList && this.state.page > 1 && (
-          <button
-            onClick={() => {
-              this.onNextPreviousPage(-1);
-            }}
-          >
-            Previous
-          </button>
-        )}
-        {this.state.moviesList && this.state.moviesList.length >= 10 && (
-          <button
-            onClick={() => {
-              this.onNextPreviousPage(1);
-            }}
-          >
-            Next
-          </button>
-        )}
+        <div className="pagination">
+          {this.state.moviesList && this.state.page > 1 && (
+            <button
+            className="btn btn-pagination"
+              onClick={() => {
+                this.onNextPreviousPage(-1);
+              }}
+            >
+              Previous Page
+            </button>
+          )}
+          {this.state.moviesList && this.state.moviesList.length >= 10 && (
+            <button
+              className="btn btn-pagination"
+              onClick={() => {
+                this.onNextPreviousPage(1);
+              }}
+            >
+              Next Page
+            </button>
+          )}
+        </div>
       </div>
     );
   }

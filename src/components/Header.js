@@ -2,10 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Logo from '../img/logo-ag-imp.svg';
 import HamburgerMenuBars from '../img/hamburger-menu-bars.svg';
-import HamburgerMenuCross from '../img/hamburger-menu-cross.svg';
 
-const Header = ( props ) => {
-  console.log(props)
+const Header = ({ showModal, setShowModal }) => {
   return (
     <div className="header">
       <NavLink to="/" className="a-no-underline">
@@ -23,10 +21,14 @@ const Header = ( props ) => {
         </NavLink>
       </div>
       <div className="hamburger-menu">
-        {!props.showModal ? (
-          <img src={HamburgerMenuBars}  onClick={()=>{props.setShowModal(true)}} alt="hamburger-menu"/>
-        ) : (
-          <img src={HamburgerMenuCross}  onClick={()=>{props.setShowModal(false)}} alt="hamburger-menu"/>
+        {!showModal && (
+          <img
+            src={HamburgerMenuBars}
+            onClick={() => {
+              setShowModal(true);
+            }}
+            alt="hamburger-menu"
+          />
         )}
       </div>
     </div>

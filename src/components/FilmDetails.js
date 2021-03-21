@@ -26,10 +26,17 @@ const FilmDetails = (props) => {
             : <img src={`/uploads/${film.posterName}`} alt="cover"/>
           }
         </p>
-        {film.title} - ({film.year}) - {film.format} - {film.condition}
-
-        <button onClick={onHandleDelete} className="btn btn-delete a-no-underline">Delete </button>
-        <button className="btn btn-delete"><Link to={`/edit_film/${props.match.params.id}`} className="a-no-underline">Edit </Link></button>
+        <h2>{film.title} - ({film.year})</h2>
+        <h3>Format: {film.format}</h3>
+        <h3>Condition: {film.condition}</h3>
+        <button onClick={onHandleDelete} className="btn btn-delete">Delete </button>
+        
+          <Link to={`/edit_film/${props.match.params.id}`} className="a-no-underline btn btn-delete">
+          {/* <button className="btn btn-delete"> */}
+            Edit 
+            {/* </button> */}
+          </Link>
+        
       </div>
     </div>
   );

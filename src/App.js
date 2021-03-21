@@ -27,7 +27,7 @@ const App = () => {
     <div className="App container">
       <Provider store={store}>
       <Router history={newHistory}>
-        {showModal && <Modal />}
+        {showModal && <Modal setShowModal={setShowModal}/>}
         <Header showModal={showModal} setShowModal={setShowModal} />
         <Route exact path="/" component={FilmList} />
         <Route path="/add_film" component={AddNewFilm} />

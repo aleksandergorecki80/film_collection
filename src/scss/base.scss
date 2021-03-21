@@ -24,7 +24,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     background-color: $background-color;
     color: $font-color;
-    font-size: 12px;
+    font-size: 14px;
 }
 .logo-div {
   display: flex;
@@ -38,33 +38,52 @@ body {
   transform: translateX(-20px);
   -webkit-text-stroke: 2px black;
 }
+
+
 .btn {
-  padding: 0;
-    border: none;
-    color: $button-font-color;
-    text-decoration: none;
-    font-size: 1rem;
-    cursor: pointer;
-    padding: 20px 10px;
-    text-align: center;
-    margin: 10px;
-    text-transform: uppercase;
-    width: 40%;
+  appearance: auto;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-align: center;
+  align-items: flex-start;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin: 0em;
+  font: 400 20px Arial;
+  padding: 15px;
+  color: $button-font-color;
+  border: none;
 }
-.btn:hover {
-  background-color: darken($button-background-color, 20%)
-}
+
+// .btn:hover {
+//   background-color: darken($button-background-color, 20%)
+// }
 
 .btn-delete {
   background-color: $button-background-color;
+  &:hover {
+    background-color: darken($button-background-color, 20%)
+  }
 }
 
 .btn-add {
   background-color: $additional-color;
+  &:hover {
+    background-color: darken($additional-color, 10%)
+  }
 }
 
 .btn-inline {
   display: inline-block;
+}
+
+.btn-pagination {
+  background-color: $button-background-color;
+  font-size: 1em;
+  padding: 5px;
+  width: 150px;
 }
 
 .a-no-underline {
