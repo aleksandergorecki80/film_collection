@@ -1,0 +1,12 @@
+.year-picker {
+    background-color: burlywood;
+    color: black;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    z-index: 1000;
+    position: absolute;
+    span {
+        padding: 10px;
+        border: 1px solid black;
+    }
+}
