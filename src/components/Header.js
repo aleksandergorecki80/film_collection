@@ -5,7 +5,7 @@ import HamburgerMenuBars from '../img/hamburger-menu-bars.svg';
 
 const Header = ({ showModal, setShowModal }) => {
   return (
-    <div className="header">
+    <div className="header-div">
       <NavLink to="/" className="a-no-underline">
         <div className="logo-div">
           <img src={Logo} alt="Logo" />
@@ -16,8 +16,11 @@ const Header = ({ showModal, setShowModal }) => {
         <NavLink to="/" className="btn btn-add a-no-underline btn-nav">
           Home
         </NavLink>
+        <NavLink to="/search_film" className="btn btn-add a-no-underline btn-nav">
+          Serach in OMDb
+        </NavLink>
         <NavLink to="/add_film" className="btn btn-add a-no-underline btn-nav">
-          Add new film
+          Add manually
         </NavLink>
       </div>
       <div className="hamburger-menu">

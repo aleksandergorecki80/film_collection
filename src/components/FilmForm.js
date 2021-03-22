@@ -4,6 +4,8 @@ import { addFilm } from '../actions/filmActions';
 import { editFilm } from '../actions/filmActions';
 import axios from 'axios';
 
+
+
 class FilmForm extends React.Component {
   constructor(props) {
     super(props);
@@ -19,6 +21,7 @@ class FilmForm extends React.Component {
 
     }
   }
+
   handleSubmit = (event) => {
     event.preventDefault()
     if (this.props.match.params.id) {
@@ -32,10 +35,24 @@ class FilmForm extends React.Component {
   };
 
   onChange = (event) => {
+    console.log(event)
     this.setState({
       film: {
         ...this.state.film,
         [event.target.name]: event.target.value
+      }
+    })
+  }
+
+  setYear = (year) => {
+    console.log('setYear')
+    var d = new Date();
+    var n = d.getFullYear()
+    console.log(n)
+    this.setState({
+      film: {
+        ...this.state.film,
+        year: n
       }
     })
   }
@@ -63,13 +80,14 @@ class FilmForm extends React.Component {
       const film = this.props.films.find((film) => {
         return film._id === this.props.match.params.id;
       });
+      console.log(film.year)
       film ? 
         this.setState({
           film: {
             title: film.title,
             format: film.format,
             condition: film.condition,
-            year: film.year,
+            year: new Date(String(film.year)),
             posterName: film.posterName
           }
         })
@@ -101,6 +119,7 @@ class FilmForm extends React.Component {
           onChange={this.onChange} 
           name="year"  
         />
+
         <select value={this.state.film.format} onChange={this.onChange} name="format">
           <option value="unknown" disabled required> -- select a format -- </option>
           <option value="DVD">DVD</option>

@@ -49,8 +49,8 @@ class SearchForFilmData extends React.Component {
   }
   render() {
     return (
-      <div>
-        <form onSubmit={this.onSubmitHandler} className="content">
+      <div className="content">
+        <form onSubmit={this.onSubmitHandler} className="form-content">
           <input
             name="title"
             type="text"

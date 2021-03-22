@@ -31,7 +31,7 @@ const FilmDetails = (props) => {
         <h3>Condition: {film.condition}</h3>
         <button onClick={onHandleDelete} className="btn btn-delete">Delete </button>
         
-          <Link to={`/edit_film/${props.match.params.id}`} className="a-no-underline btn btn-delete">
+          <Link to={`/edit_film/${props.match.params.id}`} className="a-no-underline btn btn-edit">
           {/* <button className="btn btn-delete"> */}
             Edit 
             {/* </button> */}

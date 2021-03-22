@@ -21,14 +21,23 @@ const Modal = (props) => {
               alt="hamburger-menu"
             />
           </div>
-          <NavLink 
-            to="/" 
+          <NavLink
+            to="/"
             className="btn btn-add a-no-underline btn-nav"
             onClick={() => {
               props.setShowModal(false);
             }}
-            >
+          >
             Home
+          </NavLink>
+          <NavLink
+            to="/search_film"
+            className="btn btn-add a-no-underline btn-nav"
+            onClick={() => {
+              props.setShowModal(false);
+            }}
+          >
+            Serach in OMDb
           </NavLink>
           <NavLink
             to="/add_film"

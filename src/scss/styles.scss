@@ -4,7 +4,6 @@
   align-items: center;
   flex-direction: column;
   .btn {
-    width: 80%;
     margin-bottom: 15px;
   }
 }
@@ -12,9 +11,13 @@
 .container {
   padding: 10px;
 }
-.header {
+.header-div {
   .navbar {
     display: none;
+    .btn {
+      padding: 10px;
+      font-size: 1em;
+    }
   }
   display: flex;
   align-items: center;
@@ -29,14 +32,16 @@
 .content {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  align-items: center;
   p {
     text-align: center;
     font-size: 1.2em;
   }
-  input,
-  select {
+  input, select {
     margin: 5px;
+  }
+  .form-content {
+    display: flex;
   }
 }
 .films-list {
@@ -67,10 +72,13 @@
 
 /* small tablets styles */
 @media screen and (min-width: 620px) {
+  body {
+    background-color: blanchedalmond;
+  }
   .films-list {
     grid-template-columns: repeat(4, 1fr);
   }
-  .header {
+  .header-div {
     .navbar {
       display: block;
       a {
@@ -85,7 +93,7 @@
     }
     .btn-nav {
       display: inline-block;
-      width: 10em;
+      width: 130px;
     }
   }
 }
@@ -98,10 +106,10 @@
   .films-list {
     grid-template-columns: repeat(4, 1fr);
   }
-  .header {
+  .header-div {
     .btn-nav {
       display: inline-block;
-      width: 15em;
+      width: 150px;
     }
   }
 }
@@ -110,6 +118,7 @@
 @media screen and (min-width: 1200px) {
   body {
     font-size: 20px;
+
   }
   .container {
     max-width: 1300px;
@@ -118,10 +127,10 @@
   .films-list {
     grid-template-columns: repeat(6, 1fr);
   }
-  .header {
+  .header-div {
     .btn-nav {
       display: inline-block;
-      width: 20em;
+      width: 200px;
     }
   }
 }
