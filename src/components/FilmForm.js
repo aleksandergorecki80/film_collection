@@ -34,7 +34,6 @@ class FilmForm extends React.Component {
   };
 
   onChange = (event) => {
-    console.log(event);
     this.setState({
       film: {
         ...this.state.film,
@@ -49,9 +48,8 @@ class FilmForm extends React.Component {
       end: new Date(),
     };
     const datesArray = eachYearOfInterval(interval);
-    console.log(datesArray.length);
     this.setState({
-      pickerDatesArray: datesArray,
+      pickerDatesArray: datesArray.reverse(),
     });
   };
 
@@ -80,7 +78,6 @@ class FilmForm extends React.Component {
   };
 
   setPickedYear = (event) => {
-    console.log(event.target.innerText)
     this.setState({
       film: {
         ...this.state.film,
@@ -95,14 +92,13 @@ class FilmForm extends React.Component {
       const film = this.props.films.find((film) => {
         return film._id === this.props.match.params.id;
       });
-      console.log(film.year);
       film
         ? this.setState({
             film: {
               title: film.title,
               format: film.format,
               condition: film.condition,
-              year: new Date(String(film.year)),
+              year: film.year,
               posterName: film.posterName,
             },
           })
