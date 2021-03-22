@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { addFilm } from '../actions/filmActions';
 import { editFilm } from '../actions/filmActions';
 import axios from 'axios';
-import { eachYearOfInterval, getYear } from 'date-fns';
+import { eachYearOfInterval } from 'date-fns';
+import DatePicker from './DatePicker';
 
 class FilmForm extends React.Component {
   constructor(props) {
@@ -42,10 +43,7 @@ class FilmForm extends React.Component {
     });
   };
 
-  onHandleYearPicker = (event) => {
-    // const date = new Date();
-    // const tomorrow = addDays(date, 1);
-    // // console.log(tomorrow);
+  onHandleYearPicker = () => {
     const interval = {
       start: new Date('1895'),
       end: new Date(),
@@ -56,13 +54,6 @@ class FilmForm extends React.Component {
       pickerDatesArray: datesArray,
     });
   };
-
-  // yearPicker = () =>{
-  //   return this.state.pickerDatesArray.map((year) => {
-  //     console.log(year)
-  //     return year;
-  //   })
-  // }
 
   onHanleFile = (event) => {
     const formData = new FormData();
@@ -148,18 +139,12 @@ class FilmForm extends React.Component {
             name="year"
             onFocus={this.onHandleYearPicker}
           />
-
-          <div className="year-picker">
-            {this.state.pickerDatesArray.length > 0 &&
-              this.state.pickerDatesArray.map((year, key) => {
-                return <span 
-                          key={key}
-                          onClick={this.setPickedYear}
-                          >{getYear(year)}
-                        </span>;
-              })}
-          </div>
+          {this.state.pickerDatesArray.length > 0 &&
+            <DatePicker dates={this.state.pickerDatesArray} setPickedYear={this.setPickedYear} />
+          }
+          
         </div>
+        
 
         <select
           value={this.state.film.format}
