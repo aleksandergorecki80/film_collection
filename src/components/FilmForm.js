@@ -77,7 +77,6 @@ class FilmForm extends React.Component {
     }
     // CONFIRMING DATA OF FILM IMPORTED FROM OMDB API
     if (this.props.match.path === '/confirm_data') {
-      console.log(this.props.importedData);
       this.setState({
         film: {
           ...this.state.film,
@@ -89,7 +88,6 @@ class FilmForm extends React.Component {
     }
   }
   render() {
-    console.log(this.state, 'state');
     return (
       <div>
         <form onSubmit={this.handleSubmit} className="content">
@@ -161,8 +159,6 @@ class FilmForm extends React.Component {
             <input type="submit" value="Update film" className="btn btn-add" />
           )}
         </form>
-        
-        {/* <DatePicker setPickedYear={this.setPickedYear} /> */}
       </div>
     );
   }

@@ -8,7 +8,7 @@ const DatePicker = ({defaultYear}) => {
     // const [ breakpoint, setBreakpoint ] = useState(25);
     const [ pickerDatesArray, setPickerDatesArray ] = useState('');
     // const [ arraySlice, setArraySlice ] = useState('');
-    // const [ pickedDate, setPickedDate ] = useState('');
+    const [ pickedDate, setPickedDate ] = useState('');
     // const [ numberOfSlices, setNumberOfSlices ] = useState('');
     // const [ currentSlice, setCurrentSlice ] = useState(1);
     // const [ openPicker, setOpenPicker ] = useState(false);
@@ -45,14 +45,18 @@ const DatePicker = ({defaultYear}) => {
 //    useEffect(() => {
 //     setPickedYear(pickedDate);
 //    }, [ pickedDate, setPickedYear ]);
+   useEffect(() => {
+    setPickedDate(defaultYear || '');
+   }, [ defaultYear ]);
+   console.log(defaultYear)
     return ( 
 <div className="year-picker">
       <input
         type="text"
         placeholder="Year"
-        defaultValue={defaultYear}
+        value={pickedDate}
         name="year"
-        onFocus={onHandleYearPicker}
+        onChange={onHandleYearPicker}
       />
       {/* <div className="year-picker-container">
      {openPicker && <div 
