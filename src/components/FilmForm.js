@@ -9,6 +9,7 @@ class FilmForm extends React.Component {
     super(props);
     this.state = {
       posterFile: '',
+      openPicker: false,
       film: {
         title: this.props.film ? this.props.film.title : '',
         format: this.props.film ? this.props.film.format : 'unknown',
@@ -39,6 +40,7 @@ class FilmForm extends React.Component {
   };
 
   setPickedYear = (year) => {
+    console.log('setPickedYear - year', year)
     this.setState({
       film: {
         ...this.state.film,
@@ -99,13 +101,15 @@ class FilmForm extends React.Component {
             name="title"
             required
           />
-          {/* <input type="text" placeholder="Year"
+          <input type="text" placeholder="Year"
           value={this.state.film.year}
           onChange={this.onChange} 
           name="year"  
-        /> */}
+        />
 
-          <DatePicker setPickedYear={this.setPickedYear} defaultYear={this.state.film.year}/>
+          <DatePicker setPickedYear={this.setPickedYear} 
+            defaultYear={this.state.film.year} 
+          />
 
           <select
             value={this.state.film.format}
