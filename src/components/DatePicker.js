@@ -1,64 +1,84 @@
 import React from 'react';
+import { getYear } from 'date-fns';
 
 class DatePicker extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            pickedDate: this.props.defaultYear ? this.props.defaultYear : '',
-        }
+  constructor(props) {
+    super(props);
+    this.state = {
+      pickerDatesArray: this.props.pickerDatesArray,
+      currentSlice: 1,
+      numberOfSlices: 6,
+      arraySlice: this.props.pickerDatesArray.slice(0, 25),
+      datesStart: 0,
+      breakpoint: 25,
     };
+  }
 
-    onChange = (e) => {
-      console.log(e.target.value)
-      this.setState({
-        pickedDate: e.target.value
-      });
+  onChange = (e) => {
+    this.setState({
+      pickedDate: e.target.value,
+    });
+  };
+
+  previousHandler = () => {
+    console.log('previousHandler');
+    // setStart(start-25);
+    // setBreakpoint(breakpoint-25);
+    // setArraySlice(pickerDatesArray.slice(start, breakpoint));
+    // setCurrentSlice(currentSlice-1);
+  };
+
+  nextHandler = () => {
+    console.log('nextHandler');
+    //     setStart(start+25);
+    //     setBreakpoint(breakpoint+25);
+    //     setArraySlice(pickerDatesArray.slice(start, breakpoint));
+    //     setCurrentSlice(currentSlice+1);
+  };
+
+  componentDidMount() {
+    // componentDidUpdate(prevProps, prevState, snapshot){
+    console.log('componentDidMount');
   }
-  componentDidUpdate(prevProps, prevState, snapshot){
-      if(this.state.pickedDate !== this.props.defaultYear){
-        this.setState({
-            pickedDate: this.props.defaultYear
-          })
-      }
+  componentDidUpdate(prevProps, prevState) {
+    console.log(prevState, 'prevState');
+    // if (prevState.arraySlice.length === 0) {
+    //   this.setState({
+    //     arraySlice: this.state.pickerDatesArray.slice(this.datesStart, this.breakpoint)
+    //   })
+    // }
   }
+
   render() {
-
     return (
-      <div className="year-picker">
-        {/* <input
-          type="text"
-          placeholder="Year"
-          value={this.state.pickedDate || ''}
-          name="year"
-          onChange={e => this.setState({ pickedDate: e.target.value })}
-          onChange={this.onChange}
-            onClick={onHandleYearPicker}
-        /> */}
         <div className="year-picker-container">
-            daty
-          {/* {openPicker && <div 
-          className={"previous " + 
-          (currentSlice === 1 ? "hidden" : '') 
-        }
-          onClick={previousHandler}
-          ></div>} */}
-          {/* <div className="year-picker-dates">
-            {openPicker &&
-              arraySlice &&
-              arraySlice.map((year, key) => {
+          <div
+            className={
+              'previous ' + (this.state.currentSlice === 1 ? 'hidden' : '')
+            }
+            onClick={this.previousHandler}
+          ></div>
+          <div className="year-picker-dates">
+            {this.state.arraySlice &&
+              this.state.arraySlice.map((year, key) => {
                 return (
                   // <span key={key} onClick={props.setPickedYear}>
-                  <span key={key} onClick={pickDateHandler}>
+                  <span key={key} onClick={this.props.setPickedYear}>
                     {getYear(year)}
                   </span>
                 );
               })}
-          </div> */}
-          {/* {openPicker && <div 
-        className={ "next " + (currentSlice===numberOfSlices ? "hidden" : '') }
-        onClick={nextHandler}></div>} */}
+          </div>
+          <div
+            className={
+              'next ' +
+              (this.state.currentSlice === this.state.numberOfSlices
+                ? 'hidden'
+                : '')
+            }
+            onClick={this.nextHandler}
+          ></div>
         </div>
-      </div>
     );
   }
 }

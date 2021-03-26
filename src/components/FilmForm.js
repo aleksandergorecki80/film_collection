@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { addFilm } from '../actions/filmActions';
 import { editFilm } from '../actions/filmActions';
 import DatePicker from './DatePicker';
+import { eachYearOfInterval } from 'date-fns';
 
 class FilmForm extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class FilmForm extends React.Component {
     this.state = {
       posterFile: '',
       openPicker: false,
+      pickerDatesArray: [],
       film: {
         title: this.props.film ? this.props.film.title : '',
         format: this.props.film ? this.props.film.format : 'unknown',
@@ -39,12 +41,24 @@ class FilmForm extends React.Component {
     });
   };
 
-  setPickedYear = (year) => {
-    console.log('setPickedYear - year', year)
+  openPickerHandler = () => {
+    const interval = {
+      start: new Date('1895'),
+      end: new Date(),
+    };
+    const datesArray = eachYearOfInterval(interval);
+    this.setState({
+      openPicker: true,
+      pickerDatesArray: datesArray.reverse(),
+    });
+  };
+
+  setPickedYear = (event) => {
+    console.log(event.target.innerText);
     this.setState({
       film: {
         ...this.state.film,
-        year,
+        year: event.target.innerText,
       },
     });
   };
@@ -101,16 +115,24 @@ class FilmForm extends React.Component {
             name="title"
             required
           />
-          <input type="text" placeholder="Year"
-          value={this.state.film.year}
-          onChange={this.onChange} 
-          name="year"  
-        />
-
-          <DatePicker setPickedYear={this.setPickedYear} 
-            defaultYear={this.state.film.year} 
+          <div>
+          <input
+            type="text"
+            placeholder="Year"
+            value={this.state.film.year}
+            onChange={this.onChange}
+            name="year"
+            onClick={this.openPickerHandler}
           />
 
+          {this.state.openPicker && (
+            <DatePicker
+              setPickedYear={this.setPickedYear}
+              defaultYear={this.state.film.year}
+              pickerDatesArray={this.state.pickerDatesArray}
+            />
+          )}
+          </div>
           <select
             value={this.state.film.format}
             onChange={this.onChange}
