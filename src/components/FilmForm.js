@@ -53,6 +53,14 @@ class FilmForm extends React.Component {
     });
   };
 
+  closePickerFunction = (event) => {
+    if(event.keyCode === 27){
+      this.setState({
+        openPicker: false
+      })
+    }
+  }
+
   setPickedYear = (event) => {
     this.setState({
       openPicker: false,
@@ -102,6 +110,9 @@ class FilmForm extends React.Component {
         },
       });
     }
+
+    // LISTENING FOR ESC 
+    document.addEventListener("keydown", this.closePickerFunction, false);
   }
   render() {
     return (
