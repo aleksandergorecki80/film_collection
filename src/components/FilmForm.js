@@ -43,7 +43,7 @@ class FilmForm extends React.Component {
 
   openPickerHandler = () => {
     const interval = {
-      start: new Date('1895'),
+      start: new Date(process.env.REACT_APP_DATE_START),
       end: new Date(),
     };
     const datesArray = eachYearOfInterval(interval);
@@ -54,8 +54,8 @@ class FilmForm extends React.Component {
   };
 
   setPickedYear = (event) => {
-    console.log(event.target.innerText);
     this.setState({
+      openPicker: false,
       film: {
         ...this.state.film,
         year: event.target.innerText,
@@ -116,22 +116,23 @@ class FilmForm extends React.Component {
             required
           />
           <div>
-          <input
-            type="text"
-            placeholder="Year"
-            value={this.state.film.year}
-            onChange={this.onChange}
-            name="year"
-            onClick={this.openPickerHandler}
-          />
-
-          {this.state.openPicker && (
-            <DatePicker
-              setPickedYear={this.setPickedYear}
-              defaultYear={this.state.film.year}
-              pickerDatesArray={this.state.pickerDatesArray}
+            <input
+              type="text"
+              placeholder="Year"
+              value={this.state.film.year}
+              onChange={this.onChange}
+              name="year"
+              onClick={this.openPickerHandler}
             />
-          )}
+
+            {this.state.openPicker && (
+              <DatePicker
+                setPickedYear={this.setPickedYear}
+                defaultYear={this.state.film.year}
+                pickerDatesArray={this.state.pickerDatesArray}
+                numberOfDatesOnOneSlide={25}
+              />
+            )}
           </div>
           <select
             value={this.state.film.format}
