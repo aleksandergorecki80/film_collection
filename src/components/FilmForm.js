@@ -13,6 +13,7 @@ class FilmForm extends React.Component {
       posterFile: '',
       openPicker: false,
       pickerDatesArray: [],
+      errorMessage: '',
       film: {
         title: this.props.film ? this.props.film.title : '',
         format: this.props.film ? this.props.film.format : 'unknown',
@@ -77,8 +78,9 @@ class FilmForm extends React.Component {
     formData.append('posterFile', event.target.files[0]);
     axios.post('/api/movies/upload', formData)
     .then((res) => {
-      console.log(res.data)
+      console.log(res)
       this.setState({
+        errorMessage: '',
         film: {
           ...this.state.film,
         posterName: res.data.filename
@@ -86,7 +88,11 @@ class FilmForm extends React.Component {
       })
     })
     .catch((err) => {
-      console.log(err)
+      console.log(err.message)
+      console.log(err.response.data.message);
+      this.setState({
+        errorMessage: err.response.data.message
+      })
     })
   };
 
@@ -198,8 +204,9 @@ class FilmForm extends React.Component {
             <input type="file" onChange={this.onHanleFile} id="upload-poster"/>
             <label htmlFor="upload-poster" className="">Upload file</label>
           </div>
-            <div className="img-column">
+          <div className="img-column">
            {this.state.film.posterName && displayPoster()}
+           {this.state.errorMessage && <span className="error-message">{this.state.errorMessage}</span>}
         </div>
           {!this.props.match.params.id ? (
             <input type="submit" value="Save film" className="btn btn-add" />
