@@ -21,10 +21,31 @@ class FilmForm extends React.Component {
         year: this.props.film ? this.props.film.year : '',
         posterName: this.props.film ? this.props.film.posterName : '',
       },
+      validateErrors: {
+        titleError: ''
+      }
     };
-  }
+  };
+
+// VALIDATION PATTERNS
+validateTitle = (title) => {
+  const reg = /^[\s0-9a-z?!-]{2,255}$/i;
+  return reg.test(title);
+}
+
+
   handleSubmit = (event) => {
     event.preventDefault();
+    // VALIDATION
+    if(!this.validateTitle(this.state.film.title)){
+      return this.setState({
+        validateErrors: {
+          ...this.state.validateErrors,
+          titleError: 'Wrong title format'
+        }
+      })
+    }
+    //
     if (this.props.match.params.id) {
       this.props.editFilm(this.state.film, this.props.match.params.id);
       this.props.history.push('/');
@@ -33,6 +54,8 @@ class FilmForm extends React.Component {
       this.props.history.push('/');
     }
   };
+
+
 
   onChange = (event) => {
     this.setState({
@@ -131,6 +154,7 @@ class FilmForm extends React.Component {
   }
 
   render() {
+    console.log(this.state.validateErrors.titleError)
     const displayPoster = () =>{
       return (!this.state.film.posterName.startsWith('https://') ? (
               <img src={`/uploads/${this.state.film.posterName}`} alt="cover" />
@@ -149,6 +173,7 @@ class FilmForm extends React.Component {
             name="title"
             required
           />
+          {this.state.validateErrors.titleError && <p className="validate-error">{this.state.validateErrors.titleError}</p>}
           <div>
             <input
               type="text"
