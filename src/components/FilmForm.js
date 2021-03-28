@@ -4,6 +4,7 @@ import { addFilm } from '../actions/filmActions';
 import { editFilm } from '../actions/filmActions';
 import DatePicker from './DatePicker';
 import { eachYearOfInterval } from 'date-fns';
+import axios from 'axios';
 
 class FilmForm extends React.Component {
   constructor(props) {
@@ -72,13 +73,21 @@ class FilmForm extends React.Component {
   };
 
   onHanleFile = (event) => {
-    this.setState({
-      film: {
-        ...this.state.film,
-        posterFile: event.target.files[0],
-        posterName: event.target.files[0].name,
-      },
-    });
+    const formData = new FormData();  
+    formData.append('posterFile', event.target.files[0]);
+    axios.post('/api/movies/upload', formData)
+    .then((res) => {
+      console.log(res.data)
+      this.setState({
+        film: {
+          ...this.state.film,
+        posterName: res.data.filename
+      }
+      })
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   };
 
   componentDidMount() {
@@ -114,10 +123,18 @@ class FilmForm extends React.Component {
     // LISTENING FOR ESC 
     document.addEventListener("keydown", this.closePickerFunction, false);
   }
+
   render() {
+    const displayPoster = () =>{
+      return (!this.state.film.posterName.startsWith('https://') ? (
+              <img src={`/uploads/${this.state.film.posterName}`} alt="cover" />
+            ) : (
+              <img src={this.state.film.posterName} alt="cover" />
+            ))
+    }
     return (
-      <div>
-        <form onSubmit={this.handleSubmit} className="content">
+      <div className="content add-and-edit">
+        <form onSubmit={this.handleSubmit}>
           <input
             type="text"
             placeholder="Film title"
@@ -157,47 +174,40 @@ class FilmForm extends React.Component {
             <option value="DVD">DVD</option>
             <option value="BluRey">BluRey</option>
           </select>
-          <div className="radio">
-            <label>
+          <div className="radio-group">
               <input
+                id="new"
                 name="condition"
                 type="radio"
                 value="New"
                 checked={this.state.film.condition === 'New'}
                 onChange={this.onChange}
               />
-              New
-            </label>
-          </div>
-          <div className="radio">
-            <label>
+              <label htmlFor="new">New</label>
               <input
+                id="used"
                 name="condition"
                 type="radio"
                 value="Used"
                 checked={this.state.film.condition === 'Used'}
                 onChange={this.onChange}
               />
-              Used
-            </label>
+              <label htmlFor="used">Used</label>
           </div>
-          <div>
-            {this.state.film.posterName &&
-            !this.state.film.posterName.startsWith('https://') ? (
-              <img src={`/uploads/${this.state.film.posterName}`} alt="cover" />
-            ) : (
-              <img src={this.state.film.posterName} alt="cover" />
-            )}
-            <input type="file" onChange={this.onHanleFile} />
-            <label></label>
+          <div className="poster">
+            <input type="file" onChange={this.onHanleFile} id="upload-poster"/>
+            <label htmlFor="upload-poster" className="">Upload file</label>
           </div>
+            <div className="img-column">
+           {this.state.film.posterName && displayPoster()}
+        </div>
           {!this.props.match.params.id ? (
-            <input type="submit" value="Add film" className="btn btn-add" />
+            <input type="submit" value="Save film" className="btn btn-add" />
           ) : (
             <input type="submit" value="Update film" className="btn btn-add" />
           )}
         </form>
-      </div>
+       </div>
     );
   }
 }

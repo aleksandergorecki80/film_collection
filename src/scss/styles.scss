@@ -37,11 +37,32 @@
     text-align: center;
     font-size: 1.2em;
   }
-  input, select {
-    margin: 5px;
+  input,
+  select {
+    margin: 10px 0;
   }
-  .form-content {
+  .img-column {
     display: flex;
+    justify-content: center;
+  }
+  img {
+    max-width: 90%;
+    width: 400px;
+  }
+}
+.add-and-edit {
+  .btn {
+    width: 100%;
+  }
+}
+.search {
+  .form-content {
+    .btn {
+      width: 100%;
+    }
+  }
+  .films-list {
+    margin-top: 20px;
   }
 }
 .films-list {
@@ -58,7 +79,6 @@
 }
 .thumbnail {
   text-align: center;
-  // background-color: gray;
 }
 .thumbnail-cover {
   width: 100%;
@@ -96,6 +116,15 @@
       width: 130px;
     }
   }
+  .search {
+    .form-content {
+      display: flex;
+      width: 90%;
+      .btn {
+        width: auto;
+      }
+    }
+  }
 }
 
 /* large tablets and laptops styles */
@@ -118,7 +147,6 @@
 @media screen and (min-width: 1200px) {
   body {
     font-size: 20px;
-
   }
   .container {
     max-width: 1300px;

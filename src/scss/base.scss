@@ -1,3 +1,7 @@
+* {
+  // border: 1px solid red;
+  box-sizing: border-box;
+}
 /* fonts */
 @font-face {
   font-family: 'Lato';
@@ -85,6 +89,7 @@ body {
 }
 
 .btn-add {
+  display: block;
   background-color: $additional-color;
   &:hover {
     @include buttonHover($additional-color);
@@ -106,12 +111,59 @@ body {
   text-decoration: none !important;
 }
 
+form {
+  width: 90%;
+  max-width: 800px;
+}
+
 input[type='text'],
 select {
   padding: 10px;
   outline: none;
+  width: 100%;
   // border-color: $input-border-color;
 }
+
+input[type='radio'] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+
+.add-and-edit {
+  .radio-group {
+    label {
+      display: inline-block;
+      color: $third-color;
+      border: 1px solid $third-color;
+      padding: 20px;
+      cursor: pointer;
+    }
+  }
+}
+
+input[type=radio]:checked + label{
+  background-color: $third-color;
+  color: $theme-color;
+}
+
+.poster{
+  #upload-poster {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+  }
+  label {
+    border: 2px solid $third-color;
+    border-radius: 10px;
+    padding: 20px;
+    display: inline-block;
+    margin: 20px 0;
+    color: $third-color;
+    cursor: pointer;
+  }
+}
+
 
 a {
   color: $font-color;
@@ -119,3 +171,4 @@ a {
     text-decoration: underline;
   }
 }
+
