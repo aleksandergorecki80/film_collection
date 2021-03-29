@@ -19,7 +19,7 @@ class FilmForm extends React.Component {
         format: this.props.film ? this.props.film.format : 'unknown',
         condition: this.props.film ? this.props.film.condition : '',
         year: this.props.film ? this.props.film.year : '',
-        posterName: this.props.film ? this.props.film.posterName : 'unknown',
+        posterName: this.props.film ? this.props.film.posterName : '',
       },
       validateErrors: {
         titleError: '',
@@ -229,7 +229,6 @@ validateFormat = () => {
               name="year"
               onClick={this.openPickerHandler}
               maxLength="4"
-              required
             />
             {this.state.validateErrors.yearError && (
               <p className="validate-error">
@@ -252,8 +251,7 @@ validateFormat = () => {
             required
           >
             <option value="unknown" disabled required>
-              {' '}
-              -- select a format --{' '}
+              -- select a format --
             </option>
             <option value="DVD">DVD</option>
             <option value="BluRey">BluRey</option>
@@ -290,7 +288,7 @@ validateFormat = () => {
             </label>
           </div>
           <div className="img-column">
-            {this.state.film.posterName !== 'unknown' && displayPoster()}
+            {this.state.film.posterName && displayPoster()}
             {this.state.errorMessage && (
               <span className="error-message">{this.state.errorMessage}</span>
             )}

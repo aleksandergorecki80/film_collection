@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { removeFilm } from '../actions/filmActions';
 import { Link } from 'react-router-dom';
-import NoImage from '../../src/img/no-image.svg';
 
 const FilmDetails = (props) => {
   const [film, setFilm] = useState('');
@@ -17,16 +16,10 @@ const FilmDetails = (props) => {
     return props.removeFilm(film._id);
   };
   
-const posterImg = () => {
-  // if(film.posterName !== undefined)
-}
-
-console.log(film.posterName, 'film.posterName');
   return (
     <div>
       <div className="film-details">
       <p>
-
           {
             (film.posterName !== undefined && film.posterName.startsWith('https://'))
             ? <img src={film.posterName} alt="cover"/>
