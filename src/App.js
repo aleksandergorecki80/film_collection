@@ -7,6 +7,8 @@ import Header from './components/Header';
 import FilmList from './components/FilmList';
 import SearchForFilmData from './components/filmsFromOmdb/SearchForFilmData';
 import FilmForm from './components/FilmForm';
+import Register from './components/Register';
+import Login from './components/Login';
 import { Router, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import FilmDetails from './components/FilmDetails';
@@ -35,6 +37,8 @@ const App = () => {
         <Route path="/film/:id" component={FilmDetails} />
         <Route path="/edit_film/:id" component={FilmForm} />
         <Route path="/confirm_data" component={FilmForm} />
+        <Route path="/register" component={Register} />
+        <Route path="/login" component={Login} />
       </Router>
       </Provider>
 

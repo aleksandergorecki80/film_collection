@@ -22,6 +22,12 @@ const Header = ({ showModal, setShowModal }) => {
         <NavLink to="/add_film" className="btn btn-add a-no-underline btn-nav">
           Add manually
         </NavLink>
+        <NavLink to="/register" className="btn btn-add a-no-underline btn-nav">
+          Register
+        </NavLink>
+        <NavLink to="/login" className="btn btn-add a-no-underline btn-nav">
+          Login
+        </NavLink>
       </div>
       <div className="hamburger-menu">
         {!showModal && (
