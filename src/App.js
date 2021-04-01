@@ -23,22 +23,26 @@ const store = createStore(rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
   );
 
-const App = () => {
+const App = (props) => {
   const [showModal, setShowModal] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
+  
   return (
     <div className="App container">
       <Provider store={store}>
+      
       <Router history={newHistory}>
         {showModal && <Modal setShowModal={setShowModal}/>}
-        <Header showModal={showModal} setShowModal={setShowModal} />
+        {showHeader && <Header showModal={showModal} setShowModal={setShowModal} />}
         <Route exact path="/" component={FilmList} />
         <Route path="/search_film" component={SearchForFilmData} />
         <Route path="/add_film" component={FilmForm} />
         <Route path="/film/:id" component={FilmDetails} />
         <Route path="/edit_film/:id" component={FilmForm} />
         <Route path="/confirm_data" component={FilmForm} />
-        <Route path="/register" component={Register} />
-        <Route path="/login" component={Login} />
+        <Route path="/register" component={()=> <Register setShowHeader={setShowHeader} />} />
+        {/* <Route path="/login" component={Login} setShowHeader={setShowHeader}/> */}
+        <Route path="/login" component={()=><Login setShowHeader={setShowHeader} showHeader={showHeader}/>} />
       </Router>
       </Provider>
 

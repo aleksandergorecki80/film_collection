@@ -25,7 +25,13 @@ const Header = ({ showModal, setShowModal }) => {
         <NavLink to="/register" className="btn btn-add a-no-underline btn-nav">
           Register
         </NavLink>
-        <NavLink to="/login" className="btn btn-add a-no-underline btn-nav">
+        <NavLink to={{
+          pathname:"/login",
+          aboutProps: 'kki',
+          
+        }}
+        className="btn btn-add a-no-underline btn-nav"
+        >
           Login
         </NavLink>
       </div>

@@ -7,6 +7,7 @@ class Login extends React.Component {
      }
 
      componentDidMount(){
+        //  this.props.setShowHeader(false)
         axios.get('api/users/login')
             .then((res) => {
                 this.setState({
@@ -19,9 +20,11 @@ class Login extends React.Component {
      }
 
     render() { 
+        console.log(this.props)
         return ( 
             <div>
                 {this.state.response}
+                <button onClick={() => {this.props.setShowHeader(!this.props.showHeader)}}>Klik</button>
             </div>
          );
     }

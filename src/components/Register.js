@@ -9,9 +9,13 @@ class Register extends React.Component {
         password: '',
         repeat_password: ''
       },
-      errorMessages: {
-
-      }
+      regExPatterns: {
+        name: /^[a-z\d]{5,25}$/i, // d - meta character for digit
+        //eslint-disable-next-line
+        email: /^([a-z\d\.-]+)@([a-z\d\.-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/,
+        password: /^[\w@-]{8,20}$/i  // w - any character a-z, A-Z, 0-9, including the _
+      },
+      errorMessages: []
   };
 
   onChange = (event) => {
@@ -26,7 +30,7 @@ class Register extends React.Component {
 
   handleSubmitForm = (event) => {
     event.preventDefault();
-    axios.post('/api/users/register', this.state)
+    axios.post('/api/users/register', this.state.user)
         .then((res) => {
             console.log(res)
         })
@@ -35,22 +39,13 @@ class Register extends React.Component {
         })
   };
 
-//   componentDidMount() {
-//     axios
-//       .get('/api/users/register')
-//       .then((res) => {
-//         this.setState({
-//           response: res.data,
-//         });
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   }
+  componentDidMount() {
+    this.props.setShowHeader(false);
+  }
 
   render() {
     return (
-      <div className="content">
+      <div className="content register">
         {this.state.response}
         <form onSubmit={this.handleSubmitForm}>
           <input
@@ -60,6 +55,7 @@ class Register extends React.Component {
             placeholder="Enter name"
             onChange={this.onChange}
           />
+          <p>Username must be alphanumeric and be 5-25 characters long with no spaces.</p>
           <input 
           type="email"
           name="email" 
@@ -67,6 +63,7 @@ class Register extends React.Component {
           placeholder="Enter email" 
           onChange={this.onChange}
           />
+          <p>Email must be a valid adress, e.g. me@mydomain.com</p>
           <input
             type="password"
             name="password"
@@ -74,6 +71,7 @@ class Register extends React.Component {
             placeholder="Enter password"
             onChange={this.onChange}
           />
+          <p>Password must alphanumeric (@ _ - are allowed) and be 8-20 characters long with no spaces. </p>
           <input
             type="password"
             name="repeat_password"
