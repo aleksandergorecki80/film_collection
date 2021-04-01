@@ -15,6 +15,12 @@ class Register extends React.Component {
         email: /^([a-z\d\.-]+)@([a-z\d\.-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/,
         password: /^[\w@-]{8,20}$/i  // w - any character a-z, A-Z, 0-9, including the _
       },
+      messages: {
+        name: 'Username must be alphanumeric and be 5-25 characters long with no spaces.',
+        email: 'Email must be a valid adress, e.g. me@mydomain.com',
+        password: 'Password must alphanumeric (@ _ - are allowed) and be 8-20 characters long with no spaces.',
+        repeat_password: 'Confirm password field must match the password.'
+      },
       errorMessages: []
   };
 
@@ -28,8 +34,37 @@ class Register extends React.Component {
     });
   };
 
+  validateFields = () => {
+    for (const property in this.state.regExPatterns){
+      const result =  this.state.regExPatterns[property].test(this.state.user[property]);
+      if(!result){
+        this.setState((prevState)=>{
+          return {
+            errorMessages: [...prevState.errorMessages, this.state.messages[property]]
+          }
+        })
+      }
+    }
+  }
+
+  validatePasswords = () => {
+    const result = this.state.user.password === this.state.user.repeat_password;
+    if(!result) {
+      this.setState((prevState) => {
+        return {
+          errorMessages: [...prevState.errorMessages, this.state.messages.repeat_password]
+        }
+      })
+    }
+  }
+
   handleSubmitForm = (event) => {
     event.preventDefault();
+    this.setState({
+      errorMessages: []
+    })
+    this.validateFields();
+    this.validatePasswords();
     axios.post('/api/users/register', this.state.user)
         .then((res) => {
             console.log(res)
@@ -55,7 +90,7 @@ class Register extends React.Component {
             placeholder="Enter name"
             onChange={this.onChange}
           />
-          <p>Username must be alphanumeric and be 5-25 characters long with no spaces.</p>
+          {/* <p>Username must be alphanumeric and be 5-25 characters long with no spaces.</p> */}
           <input 
           type="email"
           name="email" 
@@ -63,7 +98,7 @@ class Register extends React.Component {
           placeholder="Enter email" 
           onChange={this.onChange}
           />
-          <p>Email must be a valid adress, e.g. me@mydomain.com</p>
+          {/* <p>Email must be a valid adress, e.g. me@mydomain.com</p> */}
           <input
             type="password"
             name="password"
@@ -71,7 +106,7 @@ class Register extends React.Component {
             placeholder="Enter password"
             onChange={this.onChange}
           />
-          <p>Password must alphanumeric (@ _ - are allowed) and be 8-20 characters long with no spaces. </p>
+          {/* <p>Password must alphanumeric (@ _ - are allowed) and be 8-20 characters long with no spaces. </p> */}
           <input
             type="password"
             name="repeat_password"
@@ -79,6 +114,9 @@ class Register extends React.Component {
             placeholder="Confirm password"
             onChange={this.onChange}
           />
+          {this.state.errorMessages.map((message, key) => {
+             return <p key={key}>{message}</p>
+          })}
           <input
             type="submit"
             value="Register a new user"
