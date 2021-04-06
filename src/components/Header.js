@@ -3,11 +3,14 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Logo from '../img/logo-ag-imp.svg';
 import HamburgerMenuBars from '../img/hamburger-menu-bars.svg';
-import { fetchUserData } from '../actions/userActions';
-
-// const Header = (props) => {
+import { fetchUserData, logOutUser } from '../actions/userActions';
 
 class Header extends React.Component {
+  logOut = () => {
+    localStorage.setItem('token', '');
+    this.props.logOutUser();
+  }
+
   componentDidMount() {
     const localToken = () => {
       const localData = localStorage.getItem('token');
@@ -28,7 +31,7 @@ class Header extends React.Component {
     ) : (
       <div>
           <p>{`You are log in as: ${this.props.user.name}`}</p>
-        <button className="log-out">Log out</button>
+        <button className="log-out" onClick={this.logOut}>Log out</button>
       </div>
     );
 
@@ -73,6 +76,9 @@ const mapDispatchToProps = (dispatch) => {
     fetchUserData: (userToken) => {
       dispatch(fetchUserData(userToken));
     },
+    logOutUser: () => {
+      dispatch(logOutUser());
+    }
   };
 };
 const mapStateToProps = (state) => {

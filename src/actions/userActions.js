@@ -9,7 +9,10 @@ export const fetchUserData = (userToken) => {
       },
     })
     .then((res) => {
-      dispatch(fetchUserDataAction({name: res.data.name}))
+      dispatch(fetchUserDataAction({
+        name: res.data.name,
+        email: res.data.email
+      }))
     })
     .catch((err) => {
       console.log(err);
@@ -19,4 +22,8 @@ export const fetchUserData = (userToken) => {
 
 export const fetchUserDataAction = (user) => {
   return { type: 'LOAD_USER_DATA', user }
+}
+
+export const logOutUser = () =>{
+  return { type: 'LOG_OUT_USER', user: ''}
 }
