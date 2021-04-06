@@ -1,5 +1,5 @@
 // import './App.css';
-import React , { useState } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import Modal from './components/Modal';
@@ -9,7 +9,6 @@ import SearchForFilmData from './components/filmsFromOmdb/SearchForFilmData';
 import FilmForm from './components/FilmForm';
 import Register from './components/Register';
 import Login from './components/Login';
-import Dashboard from './components/Dashboard';
 import { Router, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import FilmDetails from './components/FilmDetails';
@@ -18,40 +17,52 @@ import thunk from 'redux-thunk';
 
 const newHistory = createBrowserHistory();
 
-const store = createStore(rootReducer, 
+const store = createStore(
+  rootReducer,
   compose(
-  applyMiddleware(thunk),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
-  );
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
+);
 
-const App = (props) => {
-  const [showModal, setShowModal] = useState(false);
-  const [showHeader, setShowHeader] = useState(true);
-  
-  return (
-    <div className="App container">
-      <Provider store={store}>
-      
-      <Router history={newHistory}>
-        {showModal && <Modal setShowModal={setShowModal}/>}
-        {showHeader && <Header showModal={showModal} setShowModal={setShowModal} />}
-        <Route exact path="/" component={FilmList} />
-        <Route path="/search_film" component={SearchForFilmData} />
-        <Route path="/add_film" component={FilmForm} />
-        <Route path="/film/:id" component={FilmDetails} />
-        <Route path="/edit_film/:id" component={FilmForm} />
-        <Route path="/confirm_data" component={FilmForm} />
-        {/* <Route path="/register" component={()=> <Register setShowHeader={setShowHeader} />} /> */}
-        <Route path="/register" component={Register} />
-        {/* <Route path="/login" component={Login} setShowHeader={setShowHeader}/> */}
-        {/* <Route path="/login" component={()=><Login setShowHeader={setShowHeader} showHeader={showHeader}/>} /> */}
-        <Route path="/login" component={Login} />
-        <Route path="/dashboard" component={()=><Dashboard setShowHeader={setShowHeader} />} />
-      </Router>
-      </Provider>
+class App extends React.Component {
+  state = {
+    showModal: false,
+    logInStatus: false,
+    userName: '',
+  };
 
-    </div >
-  );
+  setShowModal = (value) => {
+    this.setState({
+      showModal: value,
+    });
+  };
+  render() {
+    return (
+      <div className="App container">
+        <Provider store={store}>
+          <Router history={newHistory}>
+            {this.state.showModal && <Modal setShowModal={this.setShowModal} />}
+            <Header
+              showModal={this.state.showModal}
+              setShowModal={this.setShowModal}
+              // history={newHistory}
+              logInStatus={this.state.logInStatus}
+              userName={this.state.userName}
+            />
+            <Route exact path="/" component={FilmList} />
+            <Route path="/search_film" component={SearchForFilmData} />
+            <Route path="/add_film" component={FilmForm} />
+            <Route path="/film/:id" component={FilmDetails} />
+            <Route path="/edit_film/:id" component={FilmForm} />
+            <Route path="/confirm_data" component={FilmForm} />
+            <Route path="/register" component={Register} />
+            <Route path="/login" component={Login} />
+          </Router>
+        </Provider>
+      </div>
+    );
+  }
 }
 
 export default App;

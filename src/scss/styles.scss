@@ -105,7 +105,8 @@ p {
   }
   .header-div {
     .navbar {
-      display: block;
+      display: flex;
+      align-items: center;
       a {
         margin-right: 10px;
       }

@@ -9,12 +9,12 @@ class Register extends React.Component {
       name: '',
       email: '',
       password: '',
-      repeat_password: ''
+      repeat_password: '',
     },
     regExPatterns: {
       name: /^[a-z\d]{5,25}$/i, // d - meta character for digit
       //eslint-disable-next-line
-      email: /^([a-z\d\.-]+)@([a-z\d\.-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/,
+      email: /^([a-z\d\.-]+)@([a-z\d\.-]+)\.([a-z]{2,8})(\.[a-z]{5,50})?$/,
       password: /^[\w@-]{8,20}$/i, // w - any character a-z, A-Z, 0-9, including the _
     },
     messages: {
@@ -68,16 +68,16 @@ class Register extends React.Component {
     var salt = bcryptjs.genSaltSync(10);
     var hash = bcryptjs.hashSync(this.state.user.password, salt);
     return hash;
-  }
+  };
 
-  addHashedPassword = (hashedPassword) =>{
+  addHashedPassword = (hashedPassword) => {
     this.setState({
       user: {
         ...this.state.user,
-        hashedPassword
-      }
-    })
-  }
+        hashedPassword,
+      },
+    });
+  };
 
   handleSubmitForm = (event) => {
     event.preventDefault();
@@ -102,34 +102,35 @@ class Register extends React.Component {
     }
 
     const result =
-    this.validateName() &&
-    this.validateEmail() &&
-    this.validatePasswords() &&
-    this.validateRepeatPassword();
+      this.validateName() &&
+      this.validateEmail() &&
+      this.validatePasswords() &&
+      this.validateRepeatPassword();
 
-    if(result){
+    if (result) {
       const hashedPassword = this.getHash();
       axios
-      .post('/api/users/register', {
-        name: this.state.user.name,
-        email: this.state.user.email,
-        password: hashedPassword
-      })
-      .then((res) => {
-        if (res.data.error) {
-          return this.setState((prevState) => {
-            return {
-              errorMessages: [...prevState.errorMessages, res.data.error],
-            };
+        .post('/api/users', {
+          name: this.state.user.name,
+          email: this.state.user.email,
+          password: hashedPassword,
+        })
+        .then((res) => {
+          if (res.data.error) {
+            return this.setState((prevState) => {
+              return {
+                errorMessages: [...prevState.errorMessages, res.data.error],
+              };
+            });
+          }
+          this.props.history.push({
+            pathname: '/login',
+            state: res.data.message
           });
-        }
-        if(res.data._id){
-          this.props.history.push('/login');
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 

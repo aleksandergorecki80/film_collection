@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 
-import FilmReducer from './filmReducer';
+import filmReducer from './filmReducer';
 import importedFilmDataReducer from './importedFilmDataReducer';
+import userReducer from './userReducer';
 
 const rootReducer = combineReducers({
-    films: FilmReducer,
-    importedData: importedFilmDataReducer
+    films: filmReducer,
+    importedData: importedFilmDataReducer,
+    user: userReducer
 })
 
 export default rootReducer;
