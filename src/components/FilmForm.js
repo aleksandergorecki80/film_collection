@@ -182,18 +182,6 @@ class FilmForm extends React.Component {
     document.addEventListener('keydown', this.closePickerFunction, false);
   }
 
-  // componentDidUpdate(prevProps, prevState, snapshot){
-  //   // LISTENING FOR ESC
-  //   if(this.state.openPicker){
-  //     document.addEventListener('keydown', this.closePickerFunction, false);
-  //     document.querySelector('body').addEventListener('click', ()=>{
-  //       this.setState({
-  //         openPicker: false
-  //       });
-  //     });
-  //   }
-  // }
-
   render() {
     const displayPoster = () => {
       return !this.state.film.posterName.startsWith('https://') ? (
