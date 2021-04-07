@@ -32,17 +32,15 @@ const filmReducer = (state = defaultState, action) => {
                         title: action.film.title,
                         format: action.film.format,
                         posterName: action.film.posterName,
-                        // description: action.film.description,
                         year: action.film.year,
-                        // genere: action.film.genere,
-                        // date: action.film.date,
-                        // isInCollection: action.film.isInCollection,
                         condition: action.film.condition,
                         _id: action._id
                     }} else {
                         return film
                     }
-            })
+            });
+        case 'RESET_FILMS_LIST':
+            return action.films
         default:
             return state
     }

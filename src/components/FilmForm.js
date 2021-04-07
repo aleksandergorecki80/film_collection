@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addFilm } from '../actions/filmActions';
 import { editFilm } from '../actions/filmActions';
@@ -24,7 +25,7 @@ class FilmForm extends React.Component {
       validateErrors: {
         titleError: '',
         yearError: '',
-        formatError: ''
+        formatError: '',
       },
     };
   }
@@ -42,9 +43,9 @@ class FilmForm extends React.Component {
     );
   };
 
-validateFormat = () => {
-  return this.state.film.format !== 'unknown';
-}
+  validateFormat = () => {
+    return this.state.film.format !== 'unknown';
+  };
 
   // SUBMIT
   handleSubmit = (event) => {
@@ -69,13 +70,13 @@ validateFormat = () => {
         },
       });
     }
-    if(!this.validateFormat()){
+    if (!this.validateFormat()) {
       return this.setState({
         validateErrors: {
           ...this.validateErrors,
-          formatError: "Please select format"
-        }
-      })
+          formatError: 'Please select format',
+        },
+      });
     }
 
     // VALIDATION SUCCESFUL
@@ -83,7 +84,7 @@ validateFormat = () => {
       this.props.editFilm(this.state.film, this.props.match.params.id);
       this.props.history.push('/');
     } else {
-      this.props.addFilm(this.state.film);
+      this.props.addFilm(this.state.film, this.props.user.token);
       this.props.history.push('/');
     }
   };
@@ -133,7 +134,6 @@ validateFormat = () => {
     axios
       .post('/api/movies/upload', formData)
       .then((res) => {
-        console.log(res);
         this.setState({
           errorMessage: '',
           film: {
@@ -143,8 +143,6 @@ validateFormat = () => {
         });
       })
       .catch((err) => {
-        console.log(err.message);
-        console.log(err.response.data.message);
         this.setState({
           errorMessage: err.response.data.message,
         });
@@ -204,6 +202,16 @@ validateFormat = () => {
         <img src={this.state.film.posterName} alt="cover" />
       );
     };
+
+    const pleaseRegisterLoginMessage = () => {
+      return (
+        <p>
+          Please <NavLink to="/Login">Log in</NavLink> or{' '}
+          <NavLink to="/register">Register</NavLink>
+        </p>
+      );
+    };
+
     return (
       <div className="content add-and-edit">
         <form onSubmit={this.handleSubmit}>
@@ -257,10 +265,10 @@ validateFormat = () => {
             <option value="BluRey">BluRey</option>
           </select>
           {this.state.validateErrors.formatError && (
-              <p className="validate-error">
-                {this.state.validateErrors.formatError}
-              </p>
-            )}
+            <p className="validate-error">
+              {this.state.validateErrors.formatError}
+            </p>
+          )}
           <div className="radio-group">
             <input
               id="new"
@@ -293,10 +301,18 @@ validateFormat = () => {
               <span className="error-message">{this.state.errorMessage}</span>
             )}
           </div>
-          {!this.props.match.params.id ? (
-            <input type="submit" value="Save film" className="btn btn-add" />
+          {this.props.user.token ? (
+            !this.props.match.params.id ? (
+              <input type="submit" value="Save film" className="btn btn-add" />
+            ) : (
+              <input
+                type="submit"
+                value="Update film"
+                className="btn btn-add"
+              />
+            )
           ) : (
-            <input type="submit" value="Update film" className="btn btn-add" />
+            pleaseRegisterLoginMessage()
           )}
         </form>
       </div>
@@ -319,6 +335,7 @@ const mapStateToProps = (state) => {
   return {
     films: state.films,
     importedData: state.importedData,
+    user: state.user,
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(FilmForm);

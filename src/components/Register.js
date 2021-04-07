@@ -125,7 +125,7 @@ class Register extends React.Component {
           }
           this.props.history.push({
             pathname: '/login',
-            state: res.data.message
+            state: res.data.message,
           });
         })
         .catch((error) => {

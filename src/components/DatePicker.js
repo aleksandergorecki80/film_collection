@@ -64,9 +64,7 @@ class DatePicker extends React.Component {
           {this.state.arraySlice &&
             this.state.arraySlice.map((year, key) => {
               return (
-                <span key={key} 
-                  onClick={this.props.setPickedYear}
-                  >
+                <span key={key} onClick={this.props.setPickedYear}>
                   {getYear(year)}
                 </span>
               );

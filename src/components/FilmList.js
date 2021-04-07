@@ -5,19 +5,22 @@ import { fetchFilmsFromDB } from '../actions/filmActions';
 
 export class FilmList extends React.Component {
   componentDidMount() {
-    this.props.fetchFilmsFromDB();
+    if (this.props.user.token) {
+      this.props.fetchFilmsFromDB(this.props.user.token);
+    }
   }
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
+    if (!prevProps.user.token && this.props.user.token) {
+      this.props.fetchFilmsFromDB(this.props.user.token);
+    }
     localStorage.setItem('films', JSON.stringify(this.props.films));
   }
   render() {
     return this.props.films.length ? (
       <div className="films-list">
-
-          {this.props.films.map((film) => {
-            return <Film film={film} key={film._id} />;
-          })}
-
+        {this.props.films.map((film) => {
+          return <Film film={film} key={film._id} />;
+        })}
       </div>
     ) : (
       <div className="empty">Nothing to display</div>
@@ -27,14 +30,15 @@ export class FilmList extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchFilmsFromDB: () => {
-      dispatch(fetchFilmsFromDB());
+    fetchFilmsFromDB: (userToken) => {
+      dispatch(fetchFilmsFromDB(userToken));
     },
   };
 };
 const mapStateToProps = (state) => {
   return {
     films: state.films,
+    user: state.user,
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(FilmList);

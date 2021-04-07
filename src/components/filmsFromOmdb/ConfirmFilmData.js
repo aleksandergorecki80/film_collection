@@ -1,12 +1,11 @@
 import React from 'react';
 
 class ConfirmData extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       title: this.props.importedData.title,
-      year: this.props.importedData.year
+      year: this.props.importedData.year,
     };
   }
   onChange = (event) => {
@@ -18,20 +17,20 @@ class ConfirmData extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
   };
-  componentDidUpdate(prevProps, prevState){
-    if(prevState.title !== this.props.importedData.title){
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.title !== this.props.importedData.title) {
       this.setState({
         title: this.props.importedData.title,
-        year: this.props.importedData.year
-      })
+        year: this.props.importedData.year,
+      });
     }
   }
   onCancelHandler = () => {
     this.setState({
       title: '',
-      year: ''
-    })
-  }
+      year: '',
+    });
+  };
   render() {
     return (
       <div>
@@ -45,7 +44,7 @@ class ConfirmData extends React.Component {
             name="title"
             required
           />
-                    <input
+          <input
             type="text"
             placeholder="Year"
             value={this.state.year}
@@ -59,7 +58,5 @@ class ConfirmData extends React.Component {
     );
   }
 }
-
-
 
 export default ConfirmData;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import HamburgerMenuCross from '../img/hamburger-menu-cross.svg';
+import LogInNavigation from './LogInNavigation';
 
 const Modal = (props) => {
   return (
@@ -48,15 +49,7 @@ const Modal = (props) => {
           >
             Add new film
           </NavLink>
-          <NavLink
-            to="/wish_list"
-            className="btn btn-add a-no-underline btn-nav"
-            onClick={() => {
-              props.setShowModal(false);
-            }}
-          >
-            Wish list
-          </NavLink>
+          <LogInNavigation {...props}/>
         </div>
       </div>
     </div>

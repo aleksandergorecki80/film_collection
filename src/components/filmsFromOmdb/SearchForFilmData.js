@@ -67,7 +67,7 @@ class SearchForFilmData extends React.Component {
         <div className="pagination">
           {this.state.moviesList && this.state.page > 1 && (
             <button
-            className="btn btn-pagination"
+              className="btn btn-pagination"
               onClick={() => {
                 this.onNextPreviousPage(-1);
               }}

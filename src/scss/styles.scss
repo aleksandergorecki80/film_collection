@@ -46,10 +46,6 @@ p {
   select {
     margin: 10px 0;
   }
-  // .img-column {
-  //   display: flex;
-  //   justify-content: center;
-  // }
   img {
     max-width: 90%;
     width: 400px;
@@ -58,6 +54,9 @@ p {
 .add-and-edit {
   .btn {
     width: 100%;
+  }
+  a {
+    color: $third-color;
   }
 }
 .search {
@@ -105,8 +104,7 @@ p {
   }
   .header-div {
     .navbar {
-      display: flex;
-      align-items: center;
+      display: block;
       a {
         margin-right: 10px;
       }

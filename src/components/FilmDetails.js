@@ -15,28 +15,35 @@ const FilmDetails = (props) => {
   const onHandleDelete = () => {
     return props.removeFilm(film._id);
   };
-  
+
   return (
     <div>
       <div className="film-details">
-      <p>
-          {
-            (film.posterName !== undefined && film.posterName.startsWith('https://'))
-            ? <img src={film.posterName} alt="cover"/>
-            : <img src={`/uploads/${film.posterName}`} alt="cover"/>
-          }
+        <p>
+          {film.posterName !== undefined &&
+          film.posterName.startsWith('https://') ? (
+            <img src={film.posterName} alt="cover" />
+          ) : (
+            <img src={`/uploads/${film.posterName}`} alt="cover" />
+          )}
         </p>
-        <h2>{film.title} - ({film.year})</h2>
+        <h2>
+          {film.title} - ({film.year})
+        </h2>
         <h3>Format: {film.format}</h3>
         <h3>Condition: {film.condition}</h3>
-        <button onClick={onHandleDelete} className="btn btn-delete">Delete </button>
-        
-          <Link to={`/edit_film/${props.match.params.id}`} className="a-no-underline btn btn-edit">
+        <button onClick={onHandleDelete} className="btn btn-delete">
+          Delete{' '}
+        </button>
+
+        <Link
+          to={`/edit_film/${props.match.params.id}`}
+          className="a-no-underline btn btn-edit"
+        >
           {/* <button className="btn btn-delete"> */}
-            Edit 
-            {/* </button> */}
-          </Link>
-        
+          Edit
+          {/* </button> */}
+        </Link>
       </div>
     </div>
   );

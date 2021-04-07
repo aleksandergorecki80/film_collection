@@ -1,4 +1,3 @@
-// import './App.css';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -42,11 +41,11 @@ class App extends React.Component {
       <div className="App container">
         <Provider store={store}>
           <Router history={newHistory}>
-            {this.state.showModal && <Modal setShowModal={this.setShowModal} />}
+            {this.state.showModal && <Modal setShowModal={this.setShowModal} history={newHistory} />}
             <Header
               showModal={this.state.showModal}
               setShowModal={this.setShowModal}
-              // history={newHistory}
+              history={newHistory}
               logInStatus={this.state.logInStatus}
               userName={this.state.userName}
             />

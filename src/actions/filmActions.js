@@ -1,9 +1,13 @@
 import axios from 'axios';
 
-export const fetchFilmsFromDB = () => {
+export const fetchFilmsFromDB = (userToken) => {
   return (dispatch) => {
     return axios
-      .get('/api/movies')
+      .get('/api/movies', {
+        headers: {
+          'x-auth-token': userToken,
+        },
+      })
       .then((res) => {
         dispatch(fetchFilmsAction(res.data));
       })
@@ -14,8 +18,8 @@ export const fetchFilmsFromDB = () => {
 };
 
 export const fetchFilmsAction = (films) => {
-  return { type: 'LOAD_FILMS', films }
-}
+  return { type: 'LOAD_FILMS', films };
+};
 
 export const removeFilm = (_id) => {
   return (dispatch) => {
@@ -32,12 +36,16 @@ export const removeFilm = (_id) => {
 
 export const removeFilmAction = (_id) => {
   return { type: 'REMOVE_FILM', _id };
-}
+};
 
-export const addFilm = (film) => {
+export const addFilm = (film, userToken) => {
   return (dispatch, getState) => {
     axios
-      .post('/api/movies', film)
+      .post('/api/movies', film, {
+        headers: {
+          'x-auth-token': userToken,
+        },
+      })
       .then(() => {
         dispatch(addFilmAction(film));
       })
@@ -49,9 +57,10 @@ export const addFilm = (film) => {
 
 export const addFilmAction = (film) => {
   return {
-    type: 'ADD_FILM', film 
-  }
-}
+    type: 'ADD_FILM',
+    film,
+  };
+};
 
 export const editFilm = (film, _id) => {
   return (dispatch) => {
@@ -67,5 +76,9 @@ export const editFilm = (film, _id) => {
 };
 
 export const editFilmAction = (film, _id) => {
-  return { type: 'EDIT_FILM', film, _id }
-}
+  return { type: 'EDIT_FILM', film, _id };
+};
+
+export const resetFilmList = () => {
+  return { type: 'RESET_FILMS_LIST', films: [] };
+};
