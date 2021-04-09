@@ -21,10 +21,14 @@ export const fetchFilmsAction = (films) => {
   return { type: 'LOAD_FILMS', films };
 };
 
-export const removeFilm = (_id) => {
+export const removeFilm = (_id, userToken) => {
   return (dispatch) => {
     return axios
-      .delete(`/api/movies/${_id}`)
+      .delete(`/api/movies/${_id}`, {
+        headers: {
+          'x-auth-token': userToken,
+          }
+        })
       .then(() => {
         dispatch(removeFilmAction(_id));
       })
@@ -62,10 +66,14 @@ export const addFilmAction = (film) => {
   };
 };
 
-export const editFilm = (film, _id) => {
+export const editFilm = (film, _id, userToken) => {
   return (dispatch) => {
     return axios
-      .put(`/api/movies/${_id}`, film)
+      .put(`/api/movies/${_id}`, film, {
+        headers: {
+          'x-auth-token': userToken,
+        },
+      })
       .then(() => {
         dispatch(editFilmAction(film, _id));
       })

@@ -13,7 +13,7 @@ const FilmDetails = (props) => {
   }, [props.films, props.history, props.match.params.id]);
 
   const onHandleDelete = () => {
-    return props.removeFilm(film._id);
+    return props.removeFilm(film._id, props.user.token);
   };
 
   return (
@@ -51,8 +51,8 @@ const FilmDetails = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    removeFilm: (_id) => {
-      dispatch(removeFilm(_id));
+    removeFilm: (_id, userToken) => {
+      dispatch(removeFilm(_id, userToken));
     },
   };
 };
@@ -60,6 +60,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     films: state.films,
+    user: state.user
   };
 };
 

@@ -81,7 +81,7 @@ class FilmForm extends React.Component {
 
     // VALIDATION SUCCESFUL
     if (this.props.match.params.id) {
-      this.props.editFilm(this.state.film, this.props.match.params.id);
+      this.props.editFilm(this.state.film, this.props.match.params.id, this.props.user.token);
       this.props.history.push('/');
     } else {
       this.props.addFilm(this.state.film, this.props.user.token);
@@ -310,11 +310,11 @@ class FilmForm extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addFilm: (film, formData) => {
-      dispatch(addFilm(film, formData));
+    addFilm: (film, userToken) => {
+      dispatch(addFilm(film, userToken));
     },
-    editFilm: (film, id) => {
-      dispatch(editFilm(film, id));
+    editFilm: (film, id, userToken) => {
+      dispatch(editFilm(film, id, userToken));
     },
   };
 };

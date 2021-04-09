@@ -116,6 +116,7 @@ class Register extends React.Component {
           password: hashedPassword,
         })
         .then((res) => {
+
           if (res.data.error) {
             return this.setState((prevState) => {
               return {
@@ -128,8 +129,13 @@ class Register extends React.Component {
             state: res.data.message,
           });
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((err) => {
+          this.setState({
+            errorMessages: [
+              ...this.state.errorMessages,
+              err.response.data.error,
+            ],
+          });
         });
     }
   };
