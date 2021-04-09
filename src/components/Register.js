@@ -161,7 +161,7 @@ class Register extends React.Component {
             onChange={this.onChange}
           />
           <input
-            type="text"
+            type="password"
             name="repeat_password"
             value={this.state.repeat_password}
             placeholder="Confirm password"
