@@ -33,7 +33,7 @@ class FilmForm extends React.Component {
   // VALIDATION PATTERNS
 
   validateTitle = (title) => {
-    const reg = /^[\s0-9a-z?!-]{2,255}$/i;
+    const reg = /^[\s0-9a-z?!-:@]{2,255}$/i;
     return reg.test(title);
   };
   validateYear = (year) => {

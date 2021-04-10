@@ -116,7 +116,6 @@ class Register extends React.Component {
           password: hashedPassword,
         })
         .then((res) => {
-
           if (res.data.error) {
             return this.setState((prevState) => {
               return {
