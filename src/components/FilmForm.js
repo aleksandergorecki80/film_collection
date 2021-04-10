@@ -143,7 +143,6 @@ class FilmForm extends React.Component {
         });
       })
       .catch((err) => {
-        console.log(err.response.data)
         this.setState({
           errorMessage: err.response.data.message,
         });
