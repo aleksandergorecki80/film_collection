@@ -32,7 +32,7 @@ class SearchForFilmData extends React.Component {
   fetchFromOmdb = () => {
     axios
       .get(
-        `https://www.omdbapi.com/?s=${this.state.title}&apikey=${process.env.REACT_APP_API_KEY}&page=${this.state.page}`, 
+        `https://www.omdbapi.com/?s=${this.state.title.trim()}&apikey=${process.env.REACT_APP_API_KEY}&page=${this.state.page}`, 
       )
       .then((res) => {
         const movies = res.data.Search;

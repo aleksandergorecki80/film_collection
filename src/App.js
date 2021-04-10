@@ -8,7 +8,8 @@ import SearchForFilmData from './components/filmsFromOmdb/SearchForFilmData';
 import FilmForm from './components/FilmForm';
 import Register from './components/Register';
 import Login from './components/Login';
-import { Router, Route } from 'react-router-dom';
+import NotFound from './components/NotFound';
+import { Router, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import FilmDetails from './components/FilmDetails';
 import rootReducer from './reducers/rootReducer';
@@ -49,14 +50,17 @@ class App extends React.Component {
               logInStatus={this.state.logInStatus}
               userName={this.state.userName}
             />
-            <Route exact path="/" component={FilmList} />
-            <Route path="/search_film" component={SearchForFilmData} />
-            <Route path="/add_film" component={FilmForm} />
-            <Route path="/film/:id" component={FilmDetails} />
-            <Route path="/edit_film/:id" component={FilmForm} />
-            <Route path="/confirm_data" component={FilmForm} />
-            <Route path="/register" component={Register} />
-            <Route path="/login" component={Login} />
+            <Switch>
+              <Route exact path="/" component={FilmList} />
+              <Route path="/search_film" component={SearchForFilmData} />
+              <Route path="/add_film" component={FilmForm} />
+              <Route path="/film/:id" component={FilmDetails} />
+              <Route path="/edit_film/:id" component={FilmForm} />
+              <Route path="/confirm_data" component={FilmForm} />
+              <Route path="/register" component={Register} />
+              <Route path="/login" component={Login} />
+              <Route component={NotFound} />
+            </Switch>
           </Router>
         </Provider>
       </div>

@@ -143,6 +143,7 @@ class FilmForm extends React.Component {
         });
       })
       .catch((err) => {
+        console.log(err.response.data)
         this.setState({
           errorMessage: err.response.data.message,
         });
@@ -286,7 +287,7 @@ class FilmForm extends React.Component {
           <div className="img-column">
             {this.state.film.posterName && displayPoster()}
             {this.state.errorMessage && (
-              <span className="error-message">{this.state.errorMessage}</span>
+              <p className="error-message">{this.state.errorMessage}</p>
             )}
           </div>
           {this.props.user.token ? (
